@@ -18,9 +18,9 @@ const Signup = () =>{
         setSignup(true);
     }
     useEffect(()=>{
-        if(login){
-            loginRef.current?.showModal()
-        }
+        if(!login) return
+        loginRef.current?.showModal()
+        
     },[login])
     return(
         <>
@@ -40,7 +40,7 @@ const Signup = () =>{
                 </div>
             </main>
             {login? (
-                <LoginDialog rereferance={loginRef}/>                
+                <LoginDialog referance={loginRef}/>                
             ):(<></>)}
             {signup? (
                 <dialog ref={signupRef}>
