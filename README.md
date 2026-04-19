@@ -24,7 +24,7 @@ Litecome is a simple messaging webapp
     -background : #2B2E4A
     -icons-buttons: #E84545
     -icons-buttons-2: #903749
-    -extra: 53354A
+    -extra: #53354A
     -text: white
     -reply-msg: gray
 

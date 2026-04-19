@@ -1,0 +1,47 @@
+.signupMain{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: 1fr 4fr 1fr;
+    
+    grid-template-areas: 
+    'signup login'
+    'signup login'
+    'signup login';
+}
+.signupRight{
+    height: 100%;
+    width: 100%;
+    grid-area: login; 
+
+    /*content alignment*/
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+
+}
+.signupRight:hover{
+    color: #E84545;
+    background-color: #1b1d30;
+}
+.signupLeft{
+    height: 100%;
+    width: 100%;
+
+    grid-area: signup;
+    align-self: center;
+    justify-self: center;
+    background-color: #0c0c0c;
+
+    /*content alignment*/
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.signupLeft:hover{
+    background-color: #1b1d30;
+    color: #E84545;
+}
+
+
