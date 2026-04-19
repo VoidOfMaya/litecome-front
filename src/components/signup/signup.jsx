@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import sendSvg from '../../assets/icons/send.svg'
 import style from './signup.module.css'
-import { LoginDialog } from '../dialogs/dialogs';
+import { LoginDialog, SignupDialog } from '../dialogs/dialogs';
 
 
 const Signup = () =>{
@@ -14,14 +14,25 @@ const Signup = () =>{
     const logInPrompt = () =>{
         setLogin(true);
     }
+    const handleLoginDialogClose = () =>{
+        setLogin(false)
+    }
     const signUpPrompt = () =>{
         setSignup(true);
+    }
+    const handleSignupDialogClose = () =>{
+        setSignup(false);
     }
     useEffect(()=>{
         if(!login) return
         loginRef.current?.showModal()
         
     },[login])
+    useEffect(()=>{
+        if(!signup) return
+        signupRef.current?.showModal()
+        
+    },[signup])
     return(
         <>
             <main className={style.signupMain}>
@@ -40,12 +51,10 @@ const Signup = () =>{
                 </div>
             </main>
             {login? (
-                <LoginDialog referance={loginRef}/>                
+                <LoginDialog referance={loginRef} close={handleLoginDialogClose}/>                
             ):(<></>)}
             {signup? (
-                <dialog ref={signupRef}>
-                    <div>Signup</div>
-                </dialog>           
+                <SignupDialog referance={signupRef} close={handleSignupDialogClose}/>         
             ):(<></>)}
         </>
     )
