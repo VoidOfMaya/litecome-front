@@ -20,5 +20,12 @@ Litecome is a simple messaging webapp
 []- availability status indicator component
 []- group chat components
 
+## color theme
+    -background : #2B2E4A
+    -icons-buttons: #E84545
+    -icons-buttons-2: #903749
+    -extra: 53354A
+    -text: white
+    -reply-msg: gray
 
 
