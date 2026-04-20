@@ -2,8 +2,8 @@
     /*layout*/
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: 4fr 1fr;
+    grid-template-columns: 2fr 4fr;
+    grid-template-rows: 9fr 1fr;
     grid-template-areas:
     'sideNav chatDisplay'
     'sideNav chatInterface'  ;
@@ -24,4 +24,27 @@
 .chatInterface{
     grid-area: chatInterface;
     border: 1px solid red;
+
+    /*layout*/
+    display: grid;
+    grid-template-columns:1fr 5fr 1fr;
+}
+.msgTxtArea{
+    border-radius: 0px;
+}
+.msgButton{
+    /*color*/
+    background-color: #151515;
+}
+.rightBtn{
+    border-radius: 50px 0px 0px 50px;
+}
+.leftBtn{
+    border-radius: 0px 50px 50px 0px;   
+}
+.msgButton:hover{
+    background-color: #0c0c0c;
+    fill:#E84545;
+    outline: 1px solid #E84545;
+    outline-offset: -1px;
 }

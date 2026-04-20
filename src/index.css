@@ -69,6 +69,21 @@ input:hover{
     background-color: #2B2E4A; 
     color: white;  
 }
+textarea{
+    outline: none;
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+    /*colors*/
+    color: white;
+    background-color: #151515;
+
+    /*font settings*/
+    font-size: 1.5em;
+}
+textarea:hover{
+    background-color: #2B2E4A; 
+}
 button{
     /*border*/
     outline: none;
