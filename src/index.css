@@ -49,6 +49,12 @@ dialog{
     /*text*/
     color: white;
 }
+label{
+
+}
+label:hover{
+    color: white;
+}
 input{
     /*border-outline*/
     outline: none;
@@ -57,7 +63,11 @@ input{
     border-radius: 10px;
     /*colors*/
     color: rgb(111, 110, 110);
-    background-color: #2B2E4A;
+    background-color: #151515;
+}
+input:hover{
+    background-color: #2B2E4A; 
+    color: white;  
 }
 button{
     /*border*/

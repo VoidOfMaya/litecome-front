@@ -19,11 +19,14 @@
     justify-content: start;
     align-items: center;
 
+    /*color*/
+    background-color: #0c0c0c;
+
 
 }
 .signupRight:hover{
     color: #E84545;
-    background-color: #1b1d30;
+    /*background-color: #1b1d30;*/
 }
 .signupLeft{
     height: 100%;
@@ -40,7 +43,7 @@
     align-items: center;
 }
 .signupLeft:hover{
-    background-color: #1b1d30;
+    /*background-color: #1b1d30;*/
     color: #E84545;
 }
 

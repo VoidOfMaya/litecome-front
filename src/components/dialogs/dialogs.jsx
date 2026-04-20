@@ -6,10 +6,10 @@ const LoginDialog = ({referance, close})=>{
         <dialog ref={referance}>
             <div style={{gridArea:'title', justifySelf: 'center'}}>Log In</div>
             <form method='none' style={{gridArea:'form'}} className={style.loginForm}>
-                <label>Email: </label>
-                <input type='email'></input>
-                <label>Password: </label>
-                <input type='password'></input>
+                <label for='Email'>Email: </label>
+                <input type='email' id='Email' name='Email' placeholder="example@example.com" required></input>
+                <label for='password'>Password: </label>
+                <input type='password' id='password' name='password' placeholder="********" min='8' required></input>
                 <button type='none'
                     onClick={(e)=>{
                         e.preventDefault()
@@ -41,31 +41,32 @@ const SignupDialog = ({referance, close}) =>{
             <div style={{gridArea:'title', justifySelf: 'center'}}>Signup</div>
 
             <form method='none' style={{gridArea:'form'}} className={style.signupForm}>
-                <label>Email :</label>
-                <input  type='email' placeholder="email" required></input>
+                <label for='Email'>Email :</label>
+                <input  type='email' id='Email' name='Email' placeholder="email" required></input>
 
-                <label>First name :</label>
-                <input  type='text' placeholder="firstName" min='3'max='12' required>
+                <label for='firstName'>First name :</label>
+                <input  type='text' id='firstName' name='firstName' placeholder="First name" min='3'max='12' required>
                 </input>
 
-                <label>Last name :</label>
-                <input  type='text' placeholder="lastName" min='3' max='12' required>
+                <label for='lastName'>Last name :</label>
+                <input  type='text' id='lastName' name='lastName' placeholder="Last name" min='3' max='12' required>
                 </input>
 
-                <label>Password :</label>
-                <input  type='password' placeholder="password" min='8' required
+                <label for='password'>Password :</label>
+                <input  type='password' id='password' name='password' placeholder="password" min='8' required
                         className={ data.password !== data.confirmPassword? style.invalidField : style.validField}
                 ></input>
 
-
-                    <label>Confirm password :</label>
-                    <input  type='password' 
-                            placeholder="confirmPassword"
-                            min='8'
-                            required
-                            onChange={(e)=>setData(prev=>({...prev, confirmPassword: e.target.value}))}
-                            className={ data.password !== data.confirmPassword? style.invalidField : style.validField}
-                    ></input>
+                <label for='confirmPass'>Confirm password :</label>
+                <input  type='password' 
+                        id='confirmPass'
+                        name='confirmPass'
+                        placeholder="Confirm password"
+                        min='8'
+                        required
+                        onChange={(e)=>setData(prev=>({...prev, confirmPassword: e.target.value}))}
+                        className={ data.password !== data.confirmPassword? style.invalidField : style.validField}
+                ></input>
                 
                 <button type='none'
                     onClick={(e)=>{
