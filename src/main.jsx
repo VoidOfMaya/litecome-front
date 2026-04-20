@@ -4,12 +4,14 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import { Signup } from './components/signup/signup.jsx'
+import { Channel } from './components/channel/channel.jsx'
 
 //page routing
 const router = createBrowserRouter([
   {path:'/', element: <App />,
     children: [
-      {/*path:'/', element: <Signup />*/}
+      {path:'/home', element: <Signup />},
+      {path:'/chatter', element:<Channel/>},
     ],
     errorElement:<h1>Error Page!</h1>
   },

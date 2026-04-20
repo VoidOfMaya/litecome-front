@@ -1,14 +1,18 @@
 import { useState } from 'react'
 import './App.css'
-import { Signup } from './components/signup/signup'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const redirect = useNavigate();
+  const [auth, setAuth]= useState({})
+
 
   return (
-    <div style={{height: '100%'}}>
-      <Signup />   
-    </div>
+    <>
+      <Outlet cotnext={{
+
+      }}/>
+    </>
   )
 }
 
