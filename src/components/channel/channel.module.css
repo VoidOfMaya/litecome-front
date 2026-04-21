@@ -21,33 +21,45 @@
     color: gray;
     /*border: 1px solid green;*/
 }
-.chatInterface{
-    /*positioning indicators:
-    
-    border: 1px solid red;
-    */
-    grid-area: chatInterface;
-    /*layout*/
+.msgCard{
+
+    margin: 1em;
     display: grid;
-    grid-template-columns:1fr 5fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 4fr;
+    grid-template-areas:
+    'author date'
+    '. txt';
 }
-.msgTxtArea{
-    border-radius: 0px;
+.msgCardReply{
+    
+    margin: 1em;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 1fr 4fr;
+    grid-template-areas:
+    '. replyMsg'
+    'author date'
+    '. txt';
 }
-.msgButton{
-    /*color*/
-    background-color: #151515;
+.replyMsg{
+    grid-area: replyMsg;
+
+    font-size: .8em;
+    color: #545559;
 }
-.rightBtn{
-    border-radius: 50px 0px 0px 50px;
+.msgSuthor{
+    grid-area: author;
 }
-.leftBtn{
-    border-radius: 0px 50px 50px 0px;   
+.msgDate{
+    grid-area: date;
+
+    font-size: .8em;
+    color: #27282c;
 }
-.msgButton:hover{
-    background-color: #0c0c0c;
-    fill:#E84545;
-    outline: 1px solid #E84545;
-    outline-offset: -1px;
+.msgTxt{
+    grid-area: txt;
+    color: white;
+    font-weight: 200;
+    font-size: .9em;
 }
