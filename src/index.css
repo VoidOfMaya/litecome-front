@@ -75,11 +75,15 @@ textarea{
     padding: 5px;
     border-radius: 10px;
     /*colors*/
-    color: white;
+    color: inherit;
     background-color: #151515;
+    
 
     /*font settings*/
-    font-size: 1.5em;
+    font-family: inherit;
+    font-size: 15px;
+
+
 }
 textarea:hover{
     background-color: #2B2E4A; 
