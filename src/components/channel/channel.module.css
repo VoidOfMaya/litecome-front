@@ -19,14 +19,14 @@
 .chatDisplay{
     grid-area: chatDisplay;
     color: gray;
-    border: 1px solid green;
+    /*border: 1px solid green;*/
 }
 .chatInterface{
     /*positioning indicators:
-    grid-area: chatInterface;
+    
     border: 1px solid red;
     */
-
+    grid-area: chatInterface;
     /*layout*/
     display: grid;
     grid-template-columns:1fr 5fr 1fr;

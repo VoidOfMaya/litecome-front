@@ -27,19 +27,22 @@
     resize: horizontal;
     overflow-y: auto;
     max-height: 200px;
+    align-self: center;
 }
 .msgButton{
     /*color*/
     background-color: #151515;
 
     /*layout*/
-    
+    height: 40px;
+    align-self: center;
     justify-items: center;
     flex: 1;
 
 }
 .rightBtn{
     border-radius: 50px 0px 0px 50px;
+    
 }
 .leftBtn{
     border-radius: 0px 50px 50px 0px;   
