@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import sendSvg from '../../assets/icons/send.svg'
+import {SendIcon} from '../iconHelper';
 import style from './signup.module.css'
 import { LoginDialog, SignupDialog } from '../dialogs/dialogs';
 
@@ -8,6 +8,7 @@ const Signup = () =>{
     //handles dialog displays
     const [login, setLogin]= useState(false);
     const [signup, setSignup]= useState(false);
+    const [signupFocus, setSignupFocus] = useState(false);
     const loginRef = useRef(null);
     const signupRef= useRef(null) ; 
 
@@ -44,10 +45,10 @@ const Signup = () =>{
                 <div className={style.signupRight}>
                     <div style={{fontSize: '28px'}}
                         onClick={()=>logInPrompt()}
-                    > Log in &gt;</div>
-                        <svg width="70" viewBox="0 0 24 24" fill="currentColor">
-                            <path d='../../assets/icons/send.svg' />
-                        </svg>
+                        onMouseEnter={()=>setSignupFocus(true)}
+                        onMouseLeave={()=>setSignupFocus(false)}
+                    > Log in</div>
+                        <SendIcon size={50} color={signupFocus? '#E84545': 'white'}/>
                 </div>
             </main>
             {login? (
