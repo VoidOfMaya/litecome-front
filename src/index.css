@@ -28,6 +28,8 @@ body{
     /*styles go here:-*/
 
 }
+#root{
+}
 dialog::backdrop {  
     backdrop-filter: blur(5px);
 }

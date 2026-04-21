@@ -1,5 +1,6 @@
 import style from './chatinterface.module.css'
 import sendMsg from '../../../assets/icons/send.svg'
+import { SendIcon } from '../../iconHelper'
 /*
 required backend handelling functionality:-
 * if outlet context user object and jwt token exists
@@ -18,7 +19,7 @@ const ChatInterface = () =>{
                 </textarea>
             </div>
             <button for='message' className={`${style.msgButton} ${style.leftBtn}`}>
-                <img src={sendMsg}></img>
+                <SendIcon color={'white'} size={24} />
             </button>
         </div>
     )
