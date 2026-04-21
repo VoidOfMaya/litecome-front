@@ -1,6 +1,14 @@
 import style from './chatinterface.module.css'
 import sendMsg from '../../../assets/icons/send.svg'
-
+/*
+required backend handelling functionality:-
+* if outlet context user object and jwt token exists
+-> on message button click it takes user object and
+    chat object then uploads message with user id and channel id
+    * always checks for if message is a reply to an other message
+      in that case it will also attach the messages id
+-> EXTRA: enable adding photos in the chat as messages or gifs and or emojies!
+*/
 const ChatInterface = () =>{
     return(
         <div className={style.chatInterface}>
