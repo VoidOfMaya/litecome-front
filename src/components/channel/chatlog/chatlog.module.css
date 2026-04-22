@@ -5,6 +5,7 @@
     margin: 1em;
     max-width: 550px;
 
+
     /*layout*/
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -28,13 +29,17 @@
     grid-template-columns: 1fr 4fr;
     grid-template-rows: 1fr 1fr 4fr;
     grid-template-areas:
-    '. replyMsg'
+    'reply replyMsg'
     'author date'
     '. txt';
     /*break behaviour*/
     white-space: normal;
     overflow-wrap: anywhere;
     word-break: break-word;
+}
+.replyIcon{
+    grid-area: reply;
+    
 }
 .replyMsg{
     grid-area: replyMsg;

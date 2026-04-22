@@ -1,4 +1,5 @@
 import { useState } from "react"
+import style from "./icons.module.css"
 
 const UserIcon =({color ,focusColor, size})=>{
     const [focuse, setFocus]= useState(false);
@@ -89,11 +90,35 @@ const LogoIcon = ({color, size})=>{
         </svg>
     )
 }
+const ReplyIcon = ({color, focusColor, width, height})=>{
+    const [focuse, setFocus]= useState(false);
+    return(
+        <div className={style.replyIcon}>
+        <svg viewBox="0 0 24 24" 
+             fill="none" 
+             xmlns="http://www.w3.org/2000/svg"
+             width={'100%'}
+             height={`${height}px`}>
+            <path 
+                d="M12 19V9.5C12 7.01472 14.0147 5 16.5 5H900" 
+                stroke={focuse? focusColor : color}
+                onMouseEnter={()=>setFocus(true)}
+                onMouseLeave={()=>setFocus(false)}
+                strokeWidth="1" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+            />
+        </svg>
+        </div>
+
+    )
+}
 export{
     LogoIcon,
     UserIcon,
     SendIcon,
     SearchIcon,
     FriendsIcon,
-    GroupIcon
+    GroupIcon,
+    ReplyIcon
 }
