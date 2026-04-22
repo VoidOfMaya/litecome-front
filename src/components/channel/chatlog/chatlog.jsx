@@ -5,7 +5,7 @@ import style from './chatlog.module.css'
 const populateChat =(messages)=>{
     return messages.map( msg=>{
         return msg.reply_to? (
-            <div key={msg.id} className={style.msgCardReply}>
+            <div key={msg.id} className={style.msgCardReply}>              
                 <ReplyIcon  height={30}                                
                             color={'#27282c'} 
                             focusColor={'#eaebf1'}
