@@ -7,7 +7,9 @@ import { ChatLog } from './chatlog/chatlog';
 import { UserIcon, 
          FriendsIcon, 
          GroupIcon, 
-         SearchIcon} from '../iconhelper/iconHelper';
+         SearchIcon,
+         SendIcon,
+         LogoIcon} from '../iconhelper/iconHelper';
 
 const Channel = () =>{
     const [chnls, setChnls] = useState(null);
@@ -34,18 +36,26 @@ const Channel = () =>{
     },[])
     return(
         <main className={style.channel}>
-            <div className={style.userNav}> 
-                <UserIcon color={'#27282c'} focusColor={'#62646b'} size={30} />
-                <FriendsIcon color={'#27282c'} focusColor={'#62646b'} size={30} />
-                <GroupIcon color={'#27282c'} focusColor={'#62646b'} size={30} />
-                <SearchIcon color={'#27282c'} focusColor={'#62646b'} size={30} />
-            </div>
             <div className={style.sideNav}>
-                {chnls? (
-                    populateChnls(chnls)
-                ):(
-                    'no channels'
-                )}
+                <div className={style.userNav}> 
+
+                    <div className={style.logo}>
+                        Chatter<LogoIcon color={'#E84545'} size={25} />
+                    </div>                        
+
+                    <UserIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
+                    <FriendsIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
+                    <GroupIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
+                    <SearchIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
+                </div>
+                <div className={style.channelList}>
+                    {chnls? (
+                        populateChnls(chnls)
+                    ):(
+                        'no channels'
+                    )}                    
+                </div>
+
 
             </div>
             <div className={style.chatDisplay}> 
