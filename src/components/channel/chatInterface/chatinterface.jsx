@@ -19,7 +19,9 @@ const ChatInterface = () =>{
                 </textarea>
             </div>
             <button for='message' className={`${style.msgButton} ${style.leftBtn}`}>
-                <SendIcon color={'white'} size={24} />
+                {/*to change focuse color, open local css file*/}
+                <SendIcon color={'white'} 
+                         size={24} />
             </button>
         </div>
     )

@@ -4,7 +4,11 @@ import { ChatInterface } from './chatInterface/chatinterface';
 import {messages, user, channels} from '../../mock/data'; // is a mock file simulating backend data
 import { ChatLog } from './chatlog/chatlog';
 
-import { UserIcon} from '../iconhelper/iconHelper';
+import { UserIcon, 
+         FriendsIcon, 
+         GroupIcon, 
+         SearchIcon} from '../iconhelper/iconHelper';
+
 const Channel = () =>{
     const [chnls, setChnls] = useState(null);
     const [chnlMsgs, setChnlMsgs] = useState(null);
@@ -31,11 +35,10 @@ const Channel = () =>{
     return(
         <main className={style.channel}>
             <div className={style.userNav}> 
-                <UserIcon   color={'#27282c'} 
-                            focusColor={'#62646b'} 
-                            size={50} 
-                            
-                            />
+                <UserIcon color={'#27282c'} focusColor={'#62646b'} size={30} />
+                <FriendsIcon color={'#27282c'} focusColor={'#62646b'} size={30} />
+                <GroupIcon color={'#27282c'} focusColor={'#62646b'} size={30} />
+                <SearchIcon color={'#27282c'} focusColor={'#62646b'} size={30} />
             </div>
             <div className={style.sideNav}>
                 {chnls? (
