@@ -2,7 +2,7 @@
     /*layout*/
     height: 100%;
     display: grid;
-    grid-template-columns:  1fr 2fr 8fr;
+    grid-template-columns:  1fr 3fr 11fr;
     grid-template-rows: 9fr 1fr;
     grid-template-areas:
     'user sideNav chatDisplay'
@@ -19,6 +19,7 @@
     justify-content: flex-start;
     margin: 5em 0px 5em 0px;
     align-items: center;
+    background-color: #171717;
 }
 .userNav button{
 

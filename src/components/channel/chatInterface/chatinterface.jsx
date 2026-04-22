@@ -1,6 +1,6 @@
 import style from './chatinterface.module.css'
 import sendMsg from '../../../assets/icons/send.svg'
-import { SendIcon } from '../../iconHelper'
+import { SendIcon } from '../../iconhelper/iconHelper'
 /*
 required backend handelling functionality:-
 * if outlet context user object and jwt token exists

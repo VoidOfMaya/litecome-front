@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import {SendIcon} from '../iconHelper';
+import {SendIcon} from '../iconhelper/iconHelper';
 import style from './signup.module.css'
 import { LoginDialog, SignupDialog } from '../dialogs/dialogs';
 
@@ -8,7 +8,6 @@ const Signup = () =>{
     //handles dialog displays
     const [login, setLogin]= useState(false);
     const [signup, setSignup]= useState(false);
-    const [signupFocus, setSignupFocus] = useState(false);
     const loginRef = useRef(null);
     const signupRef= useRef(null) ; 
 
@@ -45,10 +44,8 @@ const Signup = () =>{
                 <div className={style.signupRight}>
                     <div style={{fontSize: '28px'}}
                         onClick={()=>logInPrompt()}
-                        onMouseEnter={()=>setSignupFocus(true)}
-                        onMouseLeave={()=>setSignupFocus(false)}
                     > Log in</div>
-                        <SendIcon size={50} color={signupFocus? '#E84545': 'white'}/>
+                        <SendIcon size={50} color={'white'} focusColor={'#E84545'}/>
                 </div>
             </main>
             {login? (
