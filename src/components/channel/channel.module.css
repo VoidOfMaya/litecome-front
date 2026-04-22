@@ -13,54 +13,6 @@
     background-color: #0c0c0c;
 
 }
-.sideNav{
-    grid-area: sideNav;
-    /*
-    border: 1px solid blue;*/
-    display: flex;
-    grid-template-rows:auto;
-
-}
-
-.logo{
-    grid-area: logo; 
-    color: #E84545; 
-    display: flex;
-
-    align-items: center;  
-    justify-content: flex-start;
-    transform: rotate(-90deg);
-    padding: 45px 0px;
-
-}
-.userNav{
-    grid-area: user;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 50px;
-    align-items: center;
-    gap: 1em;
-
-    background-color: #171717;
-}
-.userNav button{
-
-    border-radius: 70px;
-}
-.channelList{
-
-}
-.channelOption{
-    display: grid;
-    height: fit-content;
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows:auto;
-    border: 1px solid white;
-
-    padding: 5px 0px 5px 5px;
-
-}
 
 .chatDisplay{
     grid-area: chatDisplay;

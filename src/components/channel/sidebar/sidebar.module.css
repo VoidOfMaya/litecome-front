@@ -1,0 +1,56 @@
+
+.sideNav{
+    grid-area: sideNav;
+    display: flex;
+    
+
+
+}
+
+.logo{
+    grid-area: logo; 
+    color: #E84545; 
+    display: flex;
+
+    align-items: center;  
+    justify-content: flex-start;
+    transform: rotate(-90deg);
+    padding: 45px 0px;
+
+}
+.userNav{
+    grid-area: user;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 50px;
+    align-items: center;
+    gap: 1em;
+
+    background-color: #171717;
+}
+.userNav button{
+
+    border-radius: 70px;
+}
+.channelList{
+    width: 100%;
+}
+.channelOption{
+    display: grid;
+    height: fit-content;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows:auto;
+    padding: 5px 0px 5px 5px;
+    border-bottom: 1px solid #62646b;
+
+    /*font-text*/
+    font-weight: 200;
+    color: #62646b;
+
+    
+}
+.channelOption:hover{
+    color: white; 
+    border-bottom: 1px solid white;
+}
