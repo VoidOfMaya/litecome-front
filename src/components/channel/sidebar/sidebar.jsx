@@ -9,12 +9,7 @@ import { UserIcon,
         RightArrow} from '../../iconhelper/iconHelper';
 import { useState } from 'react';
 
-const SideBar = ({chnls}) =>{
-    const [channelView,setChannelView]=useState(true)
-    
-    const toggelChannelView=()=>{
-        setChannelView(!channelView);
-    }
+const SideBar = ({chnls, channelView, triggerFn, swipAction}) =>{
     const populateChnls = (data) =>{
         return data.map(chnl=>{
             return(
@@ -26,7 +21,7 @@ const SideBar = ({chnls}) =>{
         })
     }
     return(
-        <div className={style.sideNav}>
+        <div className={style.sideNav} {...swipAction}>
             <div className={style.userNav}> 
                 <div className={style.logo}>
                     Chatter<LogoIcon color={'#E84545'} size={25} />
@@ -46,11 +41,11 @@ const SideBar = ({chnls}) =>{
             </div>
             {channelView? (
                 <div className={style.closeChannels}>
-                <LeftArrow size={40} fn={toggelChannelView}/>
+                <LeftArrow size={40} fn={triggerFn}/>
                 </div>  
             ):(
                 <div className={style.openChannels}>
-                <RightArrow size={40} fn={toggelChannelView}/> 
+                <RightArrow size={40} fn={triggerFn}/> 
                 </div>                       
             )}
 

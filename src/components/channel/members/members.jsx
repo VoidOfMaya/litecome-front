@@ -1,16 +1,11 @@
 import { GroupIcon, LeftArrow, RightArrow } from '../../iconhelper/iconHelper';
 import style from './members.module.css'
 import { useState } from 'react';
-const MembersBar = ({data}) =>{
-    const [channelView,setChannelView]=useState(true)
-    
-    const toggelChannelView=()=>{
-        setChannelView(!channelView);
-    }
+const MembersBar = ({data, membersView, triggerFn, swipAction}) =>{
     return(
-        <div className={style.membersContainer}>
+        <div className={style.membersContainer} {...swipAction}>
             <div className={`${style.groupMembers} 
-            ${channelView? style.open: style.close}`}>
+            ${membersView? style.open: style.close}`}>
 
                 <GroupIcon size={35} />
                 Group members
@@ -24,13 +19,13 @@ const MembersBar = ({data}) =>{
                     })
                 ):('no members yet')}
             </div>
-            {!channelView? (
+            {!membersView? (
                 <div className={style.closeChannels}>
-                <LeftArrow size={40} fn={toggelChannelView}/>
+                <LeftArrow size={40} fn={triggerFn}/>
                 </div>  
             ):(
                 <div className={style.openChannels}>
-                <RightArrow size={40} fn={toggelChannelView}/> 
+                <RightArrow size={40} fn={triggerFn}/> 
                 </div>                       
             )}        
         </div>
