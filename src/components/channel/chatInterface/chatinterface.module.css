@@ -46,11 +46,8 @@
 @media (max-width: 840px){
     .chatInterface{
         align-self: center;
-    }
-}
-
-@media (max-width: 480px){
-    .chatInterface{
         width: 95%;
     }
 }
+
+

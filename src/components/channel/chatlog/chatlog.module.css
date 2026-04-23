@@ -44,7 +44,7 @@
 .replyMsg{
     grid-area: replyMsg;
     background-color: #070809;
-    font-size: .8em;
+    font-size: .7em;
     font-weight: 200;
     color: #545559;
 }
@@ -67,7 +67,7 @@
 @media (max-width: 800px) {
     
 }
-@media (max-width: 480px) {
+@media (max-width: 650px) {
     .msgCard{
         padding: 10px;
         margin: 0;
@@ -80,4 +80,5 @@
         width: 90%;
         align-self: center;        
     }
+
 }

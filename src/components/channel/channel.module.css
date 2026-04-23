@@ -44,7 +44,7 @@
     }
 }
 /*mobile*/
-@media (max-width: 480px) {
+@media (max-width: 650px) {
     .channel{
         display: flex;
         flex-direction: column;
