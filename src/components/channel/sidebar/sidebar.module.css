@@ -2,9 +2,6 @@
 .sideNav{
     grid-area: sideNav;
     display: flex;
-    
-
-
 }
 
 .logo{
@@ -53,4 +50,22 @@
 .channelOption:hover{
     color: white; 
     border-bottom: 1px solid white;
+}
+/*tablet*/
+@media (max-width: 840px){
+    .sideNav{
+        width: fit-content;
+    }
+    .channelList{
+        display: none;
+    }
+    .channelOption{
+        display: none;
+    }
+}
+/*mobile*/
+@media (max-width: 480px){
+    .sideNav{
+        display: none;
+    }
 }

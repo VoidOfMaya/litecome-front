@@ -2,12 +2,12 @@
     /*layout*/
     height: 100%;
     display: grid;
-    grid-template-columns:   4fr 11fr;
+    grid-template-columns:   3fr 10fr 2fr;
     grid-template-rows: 1fr 17fr 2fr;
     grid-template-areas:
-    ' sideNav chatDisplay'
-    ' sideNav chatDisplay'
-    ' sideNav chatInterface'  ;
+    ' sideNav chatDisplay members'
+    ' sideNav chatDisplay members'
+    ' sideNav chatInterface members'  ;
 
     /*colors*/
     background-color: #0c0c0c;
@@ -26,7 +26,72 @@
     overflow-y: scroll;
     flex: 1;
     min-height: 0;
-    
-    border-left:1px solid #171717 ;
-    border-bottom:1px solid #171717 ;
+}
+/*members sidebar*/
+.groupMembers{
+    grid-area: members;
+}
+.membersBtn{
+    display: none;
+}
+/*channels& user sidebar*/
+.sideBarBtn{
+    display: none;
+}
+/*responsive layouts*/
+/*laptops*/
+@media (max-width: 1200px) {
+    .groupMembers{
+        display: none;
+    }
+    .membersBtn{
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 0%;
+        opacity: .5;
+    }
+    .channel{
+        grid-template-columns:   3fr 12fr ;
+        grid-template-areas:
+        ' sideNav chatDisplay'
+        ' sideNav chatDisplay'
+        ' sideNav chatInterface'  ;
+    }
+}
+/*tablet*/
+@media (max-width: 840px) {
+    .channel{
+        grid-template-columns: auto auto ;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+        ' sideNav chatDisplay'
+        ' sideNav chatDisplay'
+        ' sideNav chatInterface'  ;
+
+    }
+    .chatDisplay{
+        width: fit-content;
+    }
+    .sideBarBtn{
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 5%;
+        opacity: .5;
+    }
+}
+/*mobile*/
+@media (max-width: 480px) {
+    .channel{
+        display: flex;
+        flex-direction: column;
+    }
+    .sideBarBtn{
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        opacity: .5;
+    }
 }

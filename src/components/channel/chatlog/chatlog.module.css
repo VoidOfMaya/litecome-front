@@ -64,3 +64,20 @@
     font-size: .9em;
    
 }
+@media (max-width: 800px) {
+    
+}
+@media (max-width: 480px) {
+    .msgCard{
+        padding: 10px;
+        margin: 0;
+        width: 90%;
+        align-self: center;
+    }
+    .msgCardReply{
+        padding: 10px;
+        margin: 0;
+        width: 90%;
+        align-self: center;        
+    }
+}

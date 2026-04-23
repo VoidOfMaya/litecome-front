@@ -1,15 +1,5 @@
 .chatInterface{
-    /*positioning indicators:
-    grid-area: chatInterface;
-    border: 1px solid red;
-    */
-
-    /*layout
-    display: grid;
-    grid-template-columns:1fr 5fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    justify-items: center;
-    */
+    /*layout*/
     display: flex;
     width: 550px;
     height: 50px;
@@ -52,4 +42,15 @@
     fill:#E84545;
     outline: 1px solid #E84545;
     outline-offset: -1px;
+}
+@media (max-width: 840px){
+    .chatInterface{
+        align-self: center;
+    }
+}
+
+@media (max-width: 480px){
+    .chatInterface{
+        width: 95%;
+    }
 }

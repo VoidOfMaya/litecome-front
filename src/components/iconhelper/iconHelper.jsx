@@ -1,7 +1,7 @@
 import { useState } from "react"
 import style from "./icons.module.css"
 
-const UserIcon =({color ,focusColor, size})=>{
+const UserIcon =({color ='#27282c', focusColor='#62646b', size=25})=>{
     const [focuse, setFocus]= useState(false);
     return(
         <svg xmlns="http://www.w3.org/2000/svg" 
@@ -17,7 +17,7 @@ const UserIcon =({color ,focusColor, size})=>{
         </svg>
     )
 }
-const SendIcon = ({color, focusColor, size})=>{
+const SendIcon = ({color ='#27282c', focusColor='#62646b', size=25})=>{
     const [focuse, setFocus]= useState(false);
     return(
         <svg xmlns="http://www.w3.org/2000/svg" 
@@ -32,7 +32,7 @@ const SendIcon = ({color, focusColor, size})=>{
         </svg>
     )
 }
-const SearchIcon = ({color, focusColor, size})=>{
+const SearchIcon = ({color ='#27282c', focusColor='#62646b', size=25})=>{
     const [focuse, setFocus]= useState(false);
     return(
         <svg xmlns="http://www.w3.org/2000/svg" 
@@ -47,7 +47,7 @@ const SearchIcon = ({color, focusColor, size})=>{
         </svg>
     )
 }
-const FriendsIcon = ({color, focusColor, size})=>{
+const FriendsIcon = ({color ='#27282c', focusColor='#62646b', size=25})=>{
     const [focuse, setFocus]= useState(false);
     return(
         <svg xmlns="http://www.w3.org/2000/svg" 
@@ -62,7 +62,7 @@ const FriendsIcon = ({color, focusColor, size})=>{
         </svg>
     )
 }
-const GroupIcon = ({color, focusColor, size})=>{
+const GroupIcon = ({color ='#27282c', focusColor='#62646b', size=25})=>{
     const [focuse, setFocus]= useState(false);
     return(
         <svg xmlns="http://www.w3.org/2000/svg" 
@@ -70,8 +70,8 @@ const GroupIcon = ({color, focusColor, size})=>{
             viewBox="0 -960 960 960" 
             width={`${size}px`}
             fill={focuse? focusColor : color}
-            onMouseEnter={()=>setFocus(true)}
-            onMouseLeave={()=>setFocus(false)}
+                    onMouseEnter={()=>setFocus(true)}
+                onMouseLeave={()=>setFocus(false)}
             >
             <path d="M0-240v-63q0-43 44-70t116-27q13 0 25 .5t23 2.5q-14 21-21 44t-7 48v65H0Zm240 0v-65q0-32 17.5-58.5T307-410q32-20 76.5-30t96.5-10q53 0 97.5 10t76.5 30q32 20 49 46.5t17 58.5v65H240Zm540 0v-65q0-26-6.5-49T754-397q11-2 22.5-2.5t23.5-.5q72 0 116 26.5t44 70.5v63H780Zm-455-80h311q-10-20-55.5-35T480-370q-55 0-100.5 15T325-320ZM160-440q-33 0-56.5-23.5T80-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T160-440Zm640 0q-33 0-56.5-23.5T720-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T800-440Zm-320-40q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-600q0 50-34.5 85T480-480Zm0-80q17 0 28.5-11.5T520-600q0-17-11.5-28.5T480-640q-17 0-28.5 11.5T440-600q0 17 11.5 28.5T480-560Zm1 240Zm-1-280Z"/>
         </svg>
@@ -113,6 +113,34 @@ const ReplyIcon = ({color, focusColor, width, height})=>{
 
     )
 }
+const LeftArrow = ({color ='#27282c', focusColor='#62646b', size=25})=>{
+    const [focuse, setFocus]= useState(false);
+    return(
+        <svg xmlns="http://www.w3.org/2000/svg" 
+            height={`${size}px`}  
+            viewBox="0 -960 960 960" 
+            width={`${size}px`} 
+            fill={focuse? focusColor : color}
+                    onMouseEnter={()=>setFocus(true)}
+                    onMouseLeave={()=>setFocus(false)}>
+            <path d="M440-280v-400L240-480l200 200Zm80 160h80v-720h-80v720Z"/>
+        </svg>
+    )
+}
+const RightArrow = ({color ='#27282c', focusColor='#62646b', size=25})=>{
+    const [focuse, setFocus]= useState(false);
+    return(
+        <svg xmlns="http://www.w3.org/2000/svg" 
+            height={`${size}px`}  
+            viewBox="0 -960 960 960" 
+            width={`${size}px`}  
+            fill={focuse? focusColor : color}
+                    onMouseEnter={()=>setFocus(true)}
+                    onMouseLeave={()=>setFocus(false)}>
+            <path d="M360-120v-720h80v720h-80Zm160-160v-400l200 200-200 200Z"/>
+        </svg>
+    )
+}
 export{
     LogoIcon,
     UserIcon,
@@ -120,5 +148,7 @@ export{
     SearchIcon,
     FriendsIcon,
     GroupIcon,
-    ReplyIcon
+    ReplyIcon,
+    LeftArrow,
+    RightArrow
 }
