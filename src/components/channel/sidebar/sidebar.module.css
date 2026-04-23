@@ -40,27 +40,40 @@
     grid-template-rows:auto;
     padding: 5px 0px 5px 5px;
     border-bottom: 1px solid #62646b;
-
     /*font-text*/
     font-weight: 200;
     color: #62646b;
 
-    
 }
 .channelOption:hover{
     color: white; 
     border-bottom: 1px solid white;
 }
+/*arrow icons*/
+.closeChannels{
+    position: absolute;
+    top: 50%;
+    left: 13em;
+}
+.openChannels{
+    position: absolute;
+    top: 50%;
+    left: 5%;
+}
+/*variable for element display*/
+.close{
+    display: none;
+}
+.open{
+    display: block;
+}
 /*tablet*/
 @media (max-width: 840px){
     .sideNav{
-        width: fit-content;
-    }
-    .channelList{
-        display: none;
+        width: 100%;
     }
     .channelOption{
-        display: none;
+        width: 10em;
     }
 }
 /*mobile*/

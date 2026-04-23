@@ -4,9 +4,17 @@ import { UserIcon,
          GroupIcon, 
          SearchIcon,
          SendIcon,
-         LogoIcon} from '../../iconhelper/iconHelper';
+         LogoIcon,
+         LeftArrow,
+        RightArrow} from '../../iconhelper/iconHelper';
+import { useState } from 'react';
 
 const SideBar = ({chnls}) =>{
+    const [channelView,setChannelView]=useState(true)
+    
+    const toggelChannelView=()=>{
+        setChannelView(!channelView);
+    }
     const populateChnls = (data) =>{
         return data.map(chnl=>{
             return(
@@ -28,13 +36,24 @@ const SideBar = ({chnls}) =>{
                 <GroupIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
                 <SearchIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
             </div>
-            <div className={style.channelList}>
+            <div className={`${style.channelList} 
+            ${channelView? style.open: style.close}`}>
                 {chnls? (
                     populateChnls(chnls)
                 ):(
                     'no channels'
                 )}                    
             </div>
+            {channelView? (
+                <div className={style.closeChannels}>
+                <LeftArrow size={40} fn={toggelChannelView}/>
+                </div>  
+            ):(
+                <div className={style.openChannels}>
+                <RightArrow size={40} fn={toggelChannelView}/> 
+                </div>                       
+            )}
+
         </div>
     )
 }

@@ -34,10 +34,6 @@
 .membersBtn{
     display: none;
 }
-/*channels& user sidebar*/
-.sideBarBtn{
-    display: none;
-}
 /*responsive layouts*/
 /*laptops*/
 @media (max-width: 1200px) {
@@ -62,7 +58,7 @@
 /*tablet*/
 @media (max-width: 840px) {
     .channel{
-        grid-template-columns: auto auto ;
+        grid-template-columns: auto 7fr ;
         grid-template-rows: auto auto;
         grid-template-areas:
         ' sideNav chatDisplay'
@@ -72,13 +68,6 @@
     }
     .chatDisplay{
         width: fit-content;
-    }
-    .sideBarBtn{
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 5%;
-        opacity: .5;
     }
 }
 /*mobile*/

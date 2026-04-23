@@ -10,7 +10,12 @@ const Channel = () =>{
     const [chnls, setChnls] = useState(null);
     const [chnlMsgs, setChnlMsgs] = useState(null);
     const [members, setMembers] = useState(null);
+    // can be { closed, partial, open}
+    const [sidebarOpen, setSidebarOpen] = useState('partial');
 
+    const testFn=()=>{
+        console.log(`button has been clicked!`)
+    }
     /*get data*/
     useEffect(()=>{
         /* simulating server data with a mock data file*/
@@ -21,9 +26,6 @@ const Channel = () =>{
     },[])
     return(
         <main className={style.channel}>
-            <div className={style.sideBarBtn}>
-                <RightArrow size={40} />
-            </div>
             <SideBar chnls={chnls} className={style.sidebarContainer}/>
             <div className={style.chatDisplay}> 
                 {chnlMsgs? (
@@ -40,7 +42,7 @@ const Channel = () =>{
                 {members? (
                     members.map(member =>{
                         return(
-                            <div style={member.is_mod? {color: 'green'}:{color: 'white'}}>
+                            <div key={member.id} style={member.is_mod? {color: 'green'}:{color: 'white'}}>
                                 @{member.id}
                             </div>
                         )
