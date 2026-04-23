@@ -5,11 +5,12 @@ import {messages, user, channels, channel_members} from '../../mock/data'; // is
 import { ChatLog } from './chatlog/chatlog';
 import { SideBar } from './sidebar/sidebar';
 import { GroupIcon, LeftArrow, RightArrow } from '../iconhelper/iconHelper';
+import { MembersBar } from './members/members';
 
 const Channel = () =>{
     const [chnls, setChnls] = useState(null);
     const [chnlMsgs, setChnlMsgs] = useState(null);
-    const [members, setMembers] = useState(null);
+        const [members, setMembers] = useState(null);
     // can be { closed, partial, open}
     const [sidebarOpen, setSidebarOpen] = useState('partial');
 
@@ -33,22 +34,7 @@ const Channel = () =>{
                 ):('no chat open!')}
                 </div>
             <ChatInterface />
-            <div className={style.membersBtn}>
-                <LeftArrow size={40} />
-            </div>
-            <div className={style.groupMembers}>
-                <GroupIcon size={35} />
-                Group members
-                {members? (
-                    members.map(member =>{
-                        return(
-                            <div key={member.id} style={member.is_mod? {color: 'green'}:{color: 'white'}}>
-                                @{member.id}
-                            </div>
-                        )
-                    })
-                ):('no members yet')}
-            </div>
+            <MembersBar data={members}/>
         </main>
         
     )

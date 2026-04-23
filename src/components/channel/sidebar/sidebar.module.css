@@ -2,6 +2,7 @@
 .sideNav{
     grid-area: sideNav;
     display: flex;
+    position: relative;
 }
 
 .logo{
@@ -43,6 +44,7 @@
     /*font-text*/
     font-weight: 200;
     color: #62646b;
+    font-size: 1em;
 
 }
 .channelOption:hover{
@@ -53,7 +55,7 @@
 .closeChannels{
     position: absolute;
     top: 50%;
-    left: 13em;
+    left: 20%;
 }
 .openChannels{
     position: absolute;
@@ -67,6 +69,14 @@
 .open{
     display: block;
 }
+@media (max-width: 1200px){
+    .closeChannels{
+        left: 13em;
+    }
+    .channelOption{
+        width: 10em;
+    }
+}
 /*tablet*/
 @media (max-width: 840px){
     .sideNav{
@@ -74,6 +84,9 @@
     }
     .channelOption{
         width: 10em;
+    }
+    .closeChannels{
+        left: 13em;
     }
 }
 /*mobile*/

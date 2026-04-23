@@ -8,7 +8,6 @@
     ' sideNav chatDisplay members'
     ' sideNav chatDisplay members'
     ' sideNav chatInterface members'  ;
-
     /*colors*/
     background-color: #0c0c0c;
 
@@ -27,45 +26,19 @@
     flex: 1;
     min-height: 0;
 }
-/*members sidebar*/
-.groupMembers{
-    grid-area: members;
-}
-.membersBtn{
-    display: none;
-}
+
 /*responsive layouts*/
 /*laptops*/
 @media (max-width: 1200px) {
-    .groupMembers{
-        display: none;
-    }
-    .membersBtn{
-        display: block;
-        position: absolute;
-        top: 50%;
-        right: 0%;
-        opacity: .5;
-    }
     .channel{
-        grid-template-columns:   3fr 12fr ;
-        grid-template-areas:
-        ' sideNav chatDisplay'
-        ' sideNav chatDisplay'
-        ' sideNav chatInterface'  ;
+        grid-template-columns: auto 7fr auto;
+        grid-template-rows: auto auto;
+
     }
 }
 /*tablet*/
 @media (max-width: 840px) {
-    .channel{
-        grid-template-columns: auto 7fr ;
-        grid-template-rows: auto auto;
-        grid-template-areas:
-        ' sideNav chatDisplay'
-        ' sideNav chatDisplay'
-        ' sideNav chatInterface'  ;
 
-    }
     .chatDisplay{
         width: fit-content;
     }
@@ -75,12 +48,5 @@
     .channel{
         display: flex;
         flex-direction: column;
-    }
-    .sideBarBtn{
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 0%;
-        opacity: .5;
     }
 }

@@ -1,0 +1,49 @@
+/*members sidebar*/
+.membersContainer{
+    grid-area: members; 
+    position: relative;
+}
+.groupMembers{
+    font-weight: 200;
+    color: #62646b;
+    font-size: 1em;
+}
+.membersBtn{
+    display: none;
+}
+/*arrow functions*/
+.closeChannels{
+    position: absolute;
+    top: 50%;
+    right: 0%;
+}
+.openChannels{
+    position: absolute;
+    top: 50%;
+    right: 100%;
+}
+/*variable for element display*/
+.close{
+    display: none;
+}
+.open{
+    display: block;
+}
+@media (max-width: 1200px) {
+
+    .membersBtn{
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 0%;
+        opacity: .5;
+    }
+}
+@media (max-width: 840px){
+
+}
+@media (max-width: 480px) {
+    .membersContainer{
+        display: none;
+    }
+}
