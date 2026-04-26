@@ -2,9 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import {SendIcon} from '../iconhelper/iconHelper';
 import style from './signup.module.css'
 import { LoginDialog, SignupDialog } from '../dialogs/dialogs';
-
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 const Signup = () =>{
+    //context
+    const direct= useNavigate();
+    const {auth}=useOutletContext();
     //handles dialog displays
     const [login, setLogin]= useState(false);
     const [signup, setSignup]= useState(false);
@@ -33,6 +36,9 @@ const Signup = () =>{
         signupRef.current?.showModal()
         
     },[signup])
+    useEffect(()=>{
+        if(auth) direct('/chatter')
+    },[])
     return(
         <>
             <main className={style.signupMain}>
@@ -49,7 +55,9 @@ const Signup = () =>{
                 </div>
             </main>
             {login? (
-                <LoginDialog referance={loginRef} close={handleLoginDialogClose}/>                
+                <LoginDialog referance={loginRef} 
+                             close={handleLoginDialogClose} 
+                            />                
             ):(<></>)}
             {signup? (
                 <SignupDialog referance={signupRef} close={handleSignupDialogClose}/>         

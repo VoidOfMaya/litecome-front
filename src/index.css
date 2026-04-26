@@ -5,14 +5,13 @@ html, body, #root{
 }
 
 html{
-    /*height width indicators remove on launch*/
+    /*height width indicators remove on launch
     outline: 4px solid green;
-    outline-offset: -8px;
-    background-color: #0c0c0c;
+    outline-offset: -8px;*/
 }
 body{
     /*defaulting  settings*/
-    background-color: #2B2E4A;
+    background-color: #0c0c0c;
     font-family: "Lexend", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;

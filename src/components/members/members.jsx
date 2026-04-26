@@ -1,34 +1,54 @@
 import { GroupIcon, LeftArrow, RightArrow } from '../iconhelper/iconHelper';
 import style from './members.module.css'
 import { useState } from 'react';
-const MembersBar = ({data, membersView, triggerFn, swipAction}) =>{
-    return(
-        <div className={style.membersContainer} {...swipAction}>
-            <div className={`${style.groupMembers} 
-            ${membersView? style.open: style.close}`}>
+import { useSwipeable } from 'react-swipeable';
 
-                <GroupIcon size={35} />
-                Group members
-                {data? (
-                    data.map(member =>{
-                        return(
-                            <div key={member.id} style={member.is_mod? {color: 'green'}:{color: 'white'}}>
-                                @{member.id}
-                            </div>
-                        )
-                    })
-                ):('no members yet')}
-            </div>
-            {!membersView? (
-                <div className={style.closeChannels}>
-                <LeftArrow size={40} fn={triggerFn}/>
-                </div>  
+
+const MembersBar = ({data, membersView, triggerViewMember,auth}) =>{
+    const toggelMembersView=()=>{
+        triggerViewMember(!membersView);
+    }
+    const swipeMembersBar = useSwipeable({
+        onSwipedLeft: () => triggerViewMember(true),
+        onSwipedRight: () => triggerViewMember(false),
+    });
+
+    const populateMembers=()=>{
+        if (!data) return 'no members yet!'
+        return data.map(member =>{
+                    return(
+                        <div key={member.id} style={member.is_mod? {color: 'green'}:{color: 'white'}}>
+                            @{member.id}
+                        </div>
+                    )
+                }) 
+    }
+    return(
+        <>
+            {auth? (
+                <div className={style.membersContainer} {...swipeMembersBar}>
+                    <div className={`${style.groupMembers} 
+                    ${membersView? style.open: style.close}`}>
+
+                        <GroupIcon size={35} />
+                        Group members
+                        {populateMembers()}
+                    </div>
+                    {!membersView? (
+                        <div className={style.closeChannels}>
+                        <LeftArrow size={40} fn={toggelMembersView}/>
+                        </div>  
+                    ):(
+                        <div className={style.openChannels}>
+                        <RightArrow size={40} fn={toggelMembersView}/> 
+                        </div>                       
+                    )}        
+                </div>                
             ):(
-                <div className={style.openChannels}>
-                <RightArrow size={40} fn={triggerFn}/> 
-                </div>                       
-            )}        
-        </div>
+                <></>
+            )}
+        </>
+
 
     )
 }

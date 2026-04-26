@@ -7,9 +7,19 @@ import { UserIcon,
          LogoIcon,
          LeftArrow,
         RightArrow} from '../iconhelper/iconHelper';
-import { useState } from 'react';
+import { useState,useOutletContext } from 'react';
+import { useSwipeable } from 'react-swipeable';
 
-const SideBar = ({chnls, channelView, triggerFn, swipAction}) =>{
+const SideBar = ({chnls, channelView, triggerChannelView, auth}) =>{
+
+    const toggelChannelView=()=>{
+        triggerChannelView(!channelView);
+    }
+    const swipeSidebar = useSwipeable({
+        onSwipedLeft: () => triggerChannelView(false),
+        onSwipedRight: () => triggerChannelView(true),
+    });
+
     const populateChnls = (data) =>{
         return data.map(chnl=>{
             return(
@@ -20,35 +30,48 @@ const SideBar = ({chnls, channelView, triggerFn, swipAction}) =>{
             )
         })
     }
-    return(
-        <div className={style.sideNav} {...swipAction}>
-            <div className={style.userNav}> 
-                <div className={style.logo}>
-                    Chatter<LogoIcon color={'#E84545'} size={25} />
-                </div>                        
-                <UserIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
-                <FriendsIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
-                <GroupIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
-                <SearchIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
-            </div>
-            <div className={`${style.channelList} 
-            ${channelView? style.open: style.close}`}>
-                {chnls? (
-                    populateChnls(chnls)
+    const displayChannels=()=>{
+        return(
+            <>
+                <div className={`${style.channelList} 
+                    ${channelView? style.open: style.close}`}>
+                        {chnls? (
+                            populateChnls(chnls)
+                        ):(
+                            'no channels'
+                        )}                    
+                </div>
+                {channelView? (
+                    <div className={style.closeChannels}>
+                        <LeftArrow size={40} fn={toggelChannelView}/>
+                    </div>  
                 ):(
-                    'no channels'
-                )}                    
-            </div>
-            {channelView? (
-                <div className={style.closeChannels}>
-                <LeftArrow size={40} fn={triggerFn}/>
-                </div>  
-            ):(
-                <div className={style.openChannels}>
-                <RightArrow size={40} fn={triggerFn}/> 
-                </div>                       
-            )}
+                    <div className={style.openChannels}>
+                        <RightArrow size={40} fn={toggelChannelView}/> 
+                    </div>                       
+                )}
+            </>
+        )
+    }
+    return(
+        <div className={style.sideNav} {...swipeSidebar}>
+            <div className={style.userNav}> 
+                <div className={style.logo} onClick={()=> console.log(auth)}>
+                    Chatter<LogoIcon color={'#E84545'} size={25} />
+                </div> 
+                {auth? (
+                    <>
+                        <UserIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
+                        <FriendsIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
+                        <GroupIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
+                        <SearchIcon color={'#27282c'} focusColor={'#62646b'} size={25} />                    
+                    </>
+                ):(<></>)}                       
 
+            </div>
+            {auth?(
+                displayChannels()
+            ):(<></>)}
         </div>
     )
 }

@@ -1,18 +1,31 @@
 import { useState } from 'react'
 import style from './dialogs.module.css'
-const LoginDialog = ({referance, close})=>{
+import { useOutletContext, useNavigate } from 'react-router-dom';
 
+const LoginDialog = ({referance, close})=>{
+    const {setAuth}= useOutletContext();
+
+    const handleSubmit = (formData) =>{
+        e.preventDefault();
+        const email = formData.get("Email");
+        const password = formData.get("password");
+
+        setAuth({ email, password });
+    }
     return(
         <dialog ref={referance}>
             <div style={{gridArea:'title', justifySelf: 'center'}}>Log In</div>
-            <form method='none' style={{gridArea:'form'}} className={style.loginForm}>
+            <form   method='none' 
+                    style={{gridArea:'form'}}  
+                    className={style.loginForm}
+                    onSubmit={(e)=> {handleSubmit(e.target)}}
+                    >
                 <label for='Email'>Email: </label>
                 <input type='email' id='Email' name='Email' placeholder="example@example.com" required></input>
                 <label for='password'>Password: </label>
                 <input type='password' id='password' name='password' placeholder="********" min='8' required></input>
                 <button type='none'
                     onClick={(e)=>{
-                        e.preventDefault()
                         referance.current.close();
                         close()
                     }}
@@ -20,6 +33,7 @@ const LoginDialog = ({referance, close})=>{
                 <button type='none'
                     onClick={(e)=>{
                         e.preventDefault()
+                        setAuth(e)
                         referance.current.close()
                         close()
                     }}
