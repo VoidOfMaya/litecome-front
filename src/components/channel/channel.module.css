@@ -1,11 +1,10 @@
 .channel{
     grid-area: main;
     /*layout*/
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 450px;
     /*colors*/
     background-color: #0c0c0c;
 
@@ -23,17 +22,12 @@
     overflow-y: scroll;
     flex: 1;
     min-height: 0;
+    min-width: 0;
 }
 
 /*responsive layouts*/
 /*laptops*/
-@media (max-width: 1200px) {
-    .channel{
-        grid-template-columns: auto 7fr auto;
-        grid-template-rows: auto auto;
 
-    }
-}
 /*tablet*/
 @media (max-width: 840px) {
 

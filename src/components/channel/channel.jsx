@@ -9,14 +9,6 @@ import { useSwipeable} from 'react-swipeable';
 const Channel = () =>{
     //handels sidebar interactive actions touch and click
     const [chnlMsgs, setChnlMsgs] = useState(null);
-
-    const toggelMembersView=()=>{
-        setViewMembers(!viewMembers);
-    }
-    const membersBar = useSwipeable({
-        onSwipedLeft: () => setViewMembers(true),
-        onSwipedRight: () => setViewMembers(false),
-    });
     /*get data*/
     useEffect(()=>{
         setChnlMsgs(messages);
@@ -27,8 +19,8 @@ const Channel = () =>{
             <div className={style.chatDisplay}> 
                 {chnlMsgs? (
                     <ChatLog messages={chnlMsgs} />                       
-                ):('no chat open!')}
-                </div>
+                ):('no chat open!')}    
+            </div>
             <ChatInterface />
         </main>
         

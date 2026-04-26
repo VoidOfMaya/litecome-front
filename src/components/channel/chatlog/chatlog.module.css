@@ -20,6 +20,7 @@
     word-break: break-word;
 }
 .msgCardReply{
+    position: relative;
     /*border*/
     padding: 10px;
     margin: 1em;
@@ -39,7 +40,9 @@
 }
 .replyIcon{
     grid-area: reply;
-    
+    position: absolute;
+    top: 20%;
+    left: 35%;
 }
 .replyMsg{
     grid-area: replyMsg;

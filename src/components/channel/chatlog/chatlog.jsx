@@ -5,17 +5,20 @@ import style from './chatlog.module.css'
 const populateChat =(messages)=>{
     return messages.map( msg=>{
         return msg.reply_to? (
-            <div key={msg.id} className={style.msgCardReply}>              
-                <ReplyIcon  height={30}                                
-                            color={'#27282c'} 
-                            focusColor={'#eaebf1'}
-                            className={style.replyIcon}
-                            />
+            <div key={msg.id} className={style.msgCardReply}>       
                 <div className={style.replyMsg}>reply to {msg.reply_to}</div>
                 <div className={style.msgSuthor}>
+                    <div className={style.replyIcon}>
+                        <ReplyIcon  height={30}                                
+                                    color={'#27282c'} 
+                                    focusColor={'#eaebf1'}
+                                    />                    
+                    </div>       
                     <UserIcon   size={30}
                                 color={'#27282c'} 
-                                focusColor={'#62646b'}/> @{msg.author_id}</div>
+                                focusColor={'#62646b'}/> @{msg.author_id}
+                
+                </div>
                 <div className={style.msgDate}>{msg.created_at}</div>
                 <div className={style.msgTxt}>{msg.content}</div>
             </div>

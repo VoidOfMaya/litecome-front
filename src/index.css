@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 html, body, #root{
-    height: 100vh;
+    height: 100%;
+    overflow: hidden;
 }
 
 html{
-    /*height width indicators remove on launch
-    outline: 2px solid green;
-    outline-offset: -2px;*/
-
+    /*height width indicators remove on launch*/
+    outline: 4px solid green;
+    outline-offset: -8px;
+    background-color: #0c0c0c;
 }
 body{
     /*defaulting  settings*/
