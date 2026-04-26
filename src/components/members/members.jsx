@@ -1,4 +1,4 @@
-import { GroupIcon, LeftArrow, RightArrow } from '../../iconhelper/iconHelper';
+import { GroupIcon, LeftArrow, RightArrow } from '../iconhelper/iconHelper';
 import style from './members.module.css'
 import { useState } from 'react';
 const MembersBar = ({data, membersView, triggerFn, swipAction}) =>{

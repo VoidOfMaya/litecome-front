@@ -1,0 +1,10 @@
+.appContainer{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 18fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+    'sideNav main members';
+    /*colors*/
+    background-color: #0c0c0c;
+}

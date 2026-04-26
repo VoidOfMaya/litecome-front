@@ -6,7 +6,7 @@ import { UserIcon,
          SendIcon,
          LogoIcon,
          LeftArrow,
-        RightArrow} from '../../iconhelper/iconHelper';
+        RightArrow} from '../iconhelper/iconHelper';
 import { useState } from 'react';
 
 const SideBar = ({chnls, channelView, triggerFn, swipAction}) =>{
