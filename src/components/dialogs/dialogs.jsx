@@ -53,7 +53,13 @@ const SignupDialog = ({referance, close}) =>{
         <dialog ref={referance}>
             <div style={{gridArea:'title', justifySelf: 'center'}}>Signup</div>
 
-            <form method='none' style={{gridArea:'form'}} className={style.signupForm}>
+            <form   style={{gridArea:'form'}} 
+                    className={style.signupForm}
+                    onSubmit={(e)=>{
+                        e.preventDefault();
+                        referance.current.close()
+                        close()
+                    }}>
                 <label htmlFor='Email'>Email :</label>
                 <input  type='email' id='Email' name='Email' placeholder="email" required></input>
 
@@ -81,20 +87,16 @@ const SignupDialog = ({referance, close}) =>{
                         className={ data.password !== data.confirmPassword? style.invalidField : style.validField}
                 ></input>
                 
-                <button type='none'
+                <button type='button'
                     onClick={(e)=>{
                         e.preventDefault()
                         referance.current.close();
                         close()
                     }}
                 >Cancel</button>
-                <button type='none'
-                    onClick={(e)=>{
-                        e.preventDefault()
-                        referance.current.close()
-                        close()
-                    }}
-                >Login</button>
+                <button type='submit'>
+                    Signup
+                </button>
             </form>
         </dialog>          
     )
