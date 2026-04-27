@@ -9,9 +9,11 @@ import { UserIcon,
         RightArrow} from '../iconhelper/iconHelper';
 import { useState,useOutletContext } from 'react';
 import { useSwipeable } from 'react-swipeable';
+import { useNavigate } from 'react-router-dom';
 
 const SideBar = ({chnls, channelView, triggerChannelView, auth}) =>{
 
+    const redirect = useNavigate();
     const toggelChannelView=()=>{
         triggerChannelView(!channelView);
     }
@@ -61,7 +63,11 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth}) =>{
                 </div> 
                 {auth? (
                     <>
-                        <UserIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
+                        <UserIcon color={'#27282c'} 
+                                    focusColor={'#62646b'} 
+                                    size={25}
+                                    fn={redirect('/profile/me')}
+                             />
                         <FriendsIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
                         <GroupIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
                         <SearchIcon color={'#27282c'} focusColor={'#62646b'} size={25} />                    

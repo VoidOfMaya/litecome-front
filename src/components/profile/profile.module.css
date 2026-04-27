@@ -1,0 +1,20 @@
+.main{
+    outline: 1px solid red;
+    display: flex;
+    max-width: 450;
+    justify-content: center;
+}
+.profile{
+    align-self: center;
+    outline: 1px solid blue;
+}
+.pfp{
+    outline: 3px solid rgb(80, 80, 80);
+    border-radius: 50px;
+}
+.isOnline{
+    outline: 3px solid rgb(72, 255, 0);
+}
+.isOffline{
+    outline: 3px solid rgb(185, 0, 0);    
+}
