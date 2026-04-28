@@ -7,7 +7,7 @@ import { UserIcon,
          LogoIcon,
          LeftArrow,
         RightArrow} from '../iconhelper/iconHelper';
-import { useState,useOutletContext } from 'react';
+
 import { useSwipeable } from 'react-swipeable';
 import { useNavigate } from 'react-router-dom';
 
@@ -44,12 +44,14 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth}) =>{
                         )}                    
                 </div>
                 {channelView? (
-                    <div className={style.closeChannels}>
-                        <LeftArrow size={40} fn={toggelChannelView}/>
+                    <div className={style.closeChannels}
+                         onClick={()=> toggelChannelView()}>
+                        <LeftArrow size={40}/>
                     </div>  
                 ):(
-                    <div className={style.openChannels}>
-                        <RightArrow size={40} fn={toggelChannelView}/> 
+                    <div className={style.openChannels}
+                         onClick={()=> toggelChannelView()}>
+                        <RightArrow size={40}/> 
                     </div>                       
                 )}
             </>
@@ -66,7 +68,7 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth}) =>{
                         <UserIcon color={'#27282c'} 
                                     focusColor={'#62646b'} 
                                     size={25}
-                                    fn={redirect('/profile/me')}
+                                    fn={()=>redirect('/profile/me')}
                              />
                         <FriendsIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
                         <GroupIcon color={'#27282c'} focusColor={'#62646b'} size={25} />

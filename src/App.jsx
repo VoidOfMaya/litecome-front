@@ -29,7 +29,7 @@ function App() {
     setChnls(channels);
     setMembers(channel_members);
     console.log(auth);
-  },[auth])
+  },[auth]);
   return (
     <>
     
