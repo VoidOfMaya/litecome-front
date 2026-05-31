@@ -26,23 +26,27 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth}) =>{
     });
 
     const populateFrinds = (data) =>{
+        console.log(data)
         return data.map(chnl=>{
-            return(
+            return chnl.type === 'FRIEND'?(
+                
                 <div key={chnl.id} className={style.channelOption}>
                     <div><UserIcon/></div>
                     <div>{chnl.name}</div>
-                </div>
-            )
+                </div>                  
+            ):('')
+
         })
     }
     const populateGroups = (data) =>{
         return data.map(chnl=>{
-            return(
+            return chnl.type === 'GROUP'?(
+                
                 <div key={chnl.id} className={style.channelOption}>
-                    <div><GroupIcon/></div>
+                    <div><UserIcon/></div>
                     <div>{chnl.name}</div>
-                </div>
-            )
+                </div>                  
+            ):('')
         })
     }
     const displayChannels=()=>{
@@ -102,7 +106,7 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth}) =>{
     return(
         <div className={style.sideNav} {...swipeSidebar}>
             <div className={style.userNav}> 
-                <div className={style.logo} onClick={()=> console.log(auth)}>
+                <div className={style.logo} onClick={()=> redirect('/')}>
                     Chatter<LogoIcon color={'#E84545'} size={25} />
                 </div> 
                 {auth? (
