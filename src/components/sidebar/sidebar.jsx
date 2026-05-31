@@ -24,16 +24,14 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth}) =>{
         onSwipedLeft: () => triggerChannelView(false),
         onSwipedRight: () => triggerChannelView(true),
     });
-
     //selects and returns a data array with the specified type
     const dataCleaner = (data,type)=>{
         return data.filter(channel => channel.type === type)
     }
-
     const populateFrinds = (data) =>{
         const sortedData = dataCleaner(data, 'FRIEND')
 
-        if(sortedData.length === 0) return <div>no friends yet</div>
+        if(sortedData.length === 0) return <div className={style.channelOption}> no data</div>
         return sortedData.map(chnl=>{
             return (  
                 <div key={chnl.id} className={style.channelOption}>
@@ -56,34 +54,33 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth}) =>{
             )
         })
     }
+    // channel view toggle renderer:
+    const toggleChannelBar = () =>{
+        return channelView? (
+            <div className={style.closeChannels}
+                onClick={()=> toggelChannelView()}>
+                <LeftArrow size={40}/>
+            </div>  
+        ):(
+            <div className={style.openChannels}
+                onClick={()=> toggelChannelView()}>
+                <RightArrow size={40}/> 
+            </div>                       
+        )        
+    }
     const displayChannels=()=>{
-
         if(friends){
             return(
                 <>  
                     <div className={`${style.channelList} 
                         ${channelView? style.open: style.close}`}>
-                            <h3 style={{border: '1px solid green',textAlign:'center'}}>Friends</h3>
-                            {chnls.length > 0? (
-                                populateFrinds(chnls)
-                            ):(
-                                <div>
-                                    {console.log(chnls.length)}
-                                    no channels
-                                </div>
-                            )}                    
+                            <h3 style={{border: '1px solid green',textAlign:'center'}}>
+                                Friends
+                            </h3>
+                            {populateFrinds(chnls)}                         
                     </div>
-                    {channelView? (
-                        <div className={style.closeChannels}
-                            onClick={()=> toggelChannelView()}>
-                            <LeftArrow size={40}/>
-                        </div>  
-                    ):(
-                        <div className={style.openChannels}
-                            onClick={()=> toggelChannelView()}>
-                            <RightArrow size={40}/> 
-                        </div>                       
-                    )}
+                    {/*toggole channel sidebar view on and off via arrows:*/}
+                    {toggleChannelBar()}
                 </>  
             )
         }
@@ -93,24 +90,11 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth}) =>{
                     <div className={`${style.channelList} 
                         ${channelView? style.open: style.close}`}>
                             <h3 style={{textAlign:'center'}}>Groups</h3>
-                            {chnls.length > 0? (
-                                populateGroups(chnls)
-                            ):(
-                                'no channels'
-                            )}                    
+                            {populateGroups(chnls)}                    
                     </div>
-                    {channelView? (
-                        <div className={style.closeChannels}
-                             onClick={()=> toggelChannelView()}>
-                            <LeftArrow size={40}/>
-                        </div>  
-                    ):(
-                        <div className={style.openChannels}
-                             onClick={()=> toggelChannelView()}>
-                            <RightArrow size={40}/> 
-                        </div>                       
-                )}
-            </> 
+                    {/*toggole channel sidebar view on and off via arrows:*/}
+                    {toggleChannelBar()}
+                </> 
             )
         }
     }
