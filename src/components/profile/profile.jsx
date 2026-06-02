@@ -2,9 +2,9 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { EditeProfile, UserIcon } from "../iconhelper/iconHelper";
 import style from './profile.module.css';
-import { user as userData } from '../../mock/data'
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { notify } from "../norifications/notifications";
 const Profile = () =>{
 /*
 user data:{id, email, name, bio, photo, is_online, last_login, created_at}
@@ -12,14 +12,23 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
     const {auth}= useOutletContext();
     const redirect = useNavigate();
     const{profileId}= useParams();
-    const [user, setUser] = useState(auth.user);
-    const [editMode, setEditMode] = useState(false);
-    const [onlineStatus, setOnlineStatus] = useState(null);
-    const [formData, setFormData] = useState({
+    const [user, setUser] = useState({       
+        name: '',
+        bio: '',
+        photo: ''
+    });
+  const [formData, setFormData] = useState({
         name: user.name,
         bio: user.bio,
         photo: user.photo
-    })
+    })    
+
+    const [editMode, setEditMode] = useState(false);
+    const [loadingData, setLoadingData] = useState(true);
+    const [onlineStatus, setOnlineStatus] = useState(null);
+  
+
+
     const photoLogo = () =>{
         return(
             <>
@@ -39,10 +48,6 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
     const editProfile = ()=>{
         return(
             <>
-            {/*
-            Edit Profile form
-            reminder: set profile method for api call
-            */}
             <form className={style.profile}
                 onSubmit={(e)=> e.preventDefault()}>
                 <div style={{display: 'flex', padding: '10px'}}>
@@ -75,7 +80,7 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
                     <button 
                         type="submit"
                         style={{flex: '1'}}
-                        onClick={()=>submitProfileInfo()}>save change</button>
+                        onClick={async()=>await submitProfileInfo()}>save change</button>
                     <button
                         type="button" 
                         style={{flex: '1'}}
@@ -92,18 +97,74 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
             </>
         )
     }
-    const submitProfileInfo =()=>{
-        //placeholder for data submition to api
-        console.log(formData)
+    const submitProfileInfo = async ()=>{
+        try{
+            const result = await fetch(`http://localhost:3000/user/me/profile`,{
+                method: "PUT",
+                body: JSON.stringify({
+                    name: formData.name,
+                    bio: formData.bio,
+                    photo: formData.photo
+                }),
+                headers: {
+                    "Content-Type": 'application/json',
+                    "Authorization": `Bearer ${auth.accessToken}`,
+                },
+            })
+            if(!result.ok){
+                const errBody = await result.json();
+                if(Array.isArray(errBody.errors)){
+                    errBody.errors.map(error =>{
+                        notify.error(error.msg)
+                    })
+                }
+                throw new Error (`something went wrong`)
+            }
+            const newData = await result.json();
+            setUser(prev =>({
+                    ...prev,
+                    name: newData.name,
+                    bio:newData.bio,
+                    photo:newData.photo,
+                })
+            )
+            setEditMode(false);
+        }catch(err){
+            console.log(err.message)
+        }
     }
+    const getProfileData = async () =>{
+        setLoadingData(true)
+        try{
+            const response = await fetch('http://localhost:3000/user/me/profile',{
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${auth.accessToken}`,
+                },
+            })
+            if(!response.ok) throw new Error('could not fetch profile data')
+            return await response.json()
 
+        }catch(err){
+            console.log(err)
+        }
+    }
     useEffect(()=>{
-       setOnlineStatus(user.is_online) 
+        if (!auth) return redirect('/');
+        
+        const loadProfile = async() =>{
+            setLoadingData(true)
+            const profileData = await getProfileData();
+            setUser(profileData);
+            setOnlineStatus(user.is_online);
+            setLoadingData(false)
+        }
+
+        loadProfile()
     },[])
-    useEffect(()=>{
-        if (!auth) return redirect('/')
-        setUser(userData)
-    },[])
+    if(loadingData){
+        return(<div>Loading ....</div>)
+    }
     return(
         <> 
         <main className={style.main}> 
@@ -113,18 +174,28 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
                     <>
                     <div className={style.profile}>
                             <div className={style.editICon}
-                                onClick={()=> setEditMode(true)}>
+                                onClick={()=> {
+                                        setFormData({
+                                            name: user.name,
+                                            bio: user.bio,
+                                            photo: user.photo
+                                        });
+                                    setEditMode(true)
+                                    }
+                                }>
                                 <EditeProfile size={35} color="#5a5a5a" focusColor="#ffffff" />                    
                             </div>
                             <div style={{display: 'flex', padding: '10px'}}>
                                 {photoLogo()}
-                                <div style={{padding: '10px'}} >bio: <p className={style.dataTxt}>{user.bio}</p></div>
+                                <div style={{padding: '10px'}} >
+                                    <p className={style.dataTxt}> {user.bio}</p>
+                                </div>
                             </div>
                             <div className={style.profileData}>
                                 user:<div className={style.dataTxt}>{user.email}</div>
                                 name:<div className={style.dataTxt}>{user.name}</div>
                             
-                                created at:<div className={style.dataTxt}>{user.created_at}</div>                        
+                                created at:<div className={style.dataTxt}>{user.createdAt}</div>                        
                             </div>
                     </div>
                     </>

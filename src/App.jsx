@@ -72,7 +72,6 @@ function App() {
         return
       }
     const result = await response.json()
-    setChnls({channels: result.channels, friends: result.friends})
     return {channels: result.channels, friends: result.friends}
   }
   useEffect(()=>{
@@ -82,6 +81,7 @@ function App() {
         const result = await refresh();
         if(result && result.accessToken){
           const dashResult = await getDashbaordData(result.accessToken);
+          setChnls({channels: dashResult.channels, friends: dashResult.friends})
           console.log(dashResult)
           redirect('/chatter')
         }else{
