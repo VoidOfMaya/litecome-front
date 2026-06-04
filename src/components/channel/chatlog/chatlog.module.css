@@ -13,7 +13,7 @@
     grid-template-rows: 1fr auto;
     grid-template-areas:
     'author author'
-    'text txt'
+    '. txt'
     '. date';
     gap: 1px;
 
@@ -37,7 +37,7 @@
     grid-template-areas:
     'replyMsg replyMsg'
     'author author'
-    'txt txt'
+    '. txt'
     '. date';
     /*break behaviour*/
     white-space: normal;
