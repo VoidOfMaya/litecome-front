@@ -8,8 +8,14 @@ import { notify } from '../norifications/notifications';
 
 const Channel = () =>{
     //context
-    const{ auth, reAuth, currentChannel }= useOutletContext();
-    const [channelData, setChannelData] = useState(null);
+    const{ 
+        auth, 
+        reAuth, 
+        currentChannel,
+        channelData,
+        handleChannelData 
+    }= useOutletContext();
+    //const [channelData, setChannelData] = useState(null);
     const [loadingData, setLoadingData] = useState(true);
     const direct = useNavigate();
     //handels sidebar interactive actions touch and click
@@ -38,7 +44,7 @@ const Channel = () =>{
         if(!auth) return
         const loadChannel = async() =>{
             const result = await getData(currentChannel);
-            setChannelData(result)
+            handleChannelData(result)
         }
         loadChannel();
         

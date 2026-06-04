@@ -14,10 +14,14 @@ function App() {
   const [auth, setAuth]= useState(null);//holds user auth data and tokens
   // temporary loading state
   const [authLoading, setLoadingAuth] = useState(true)
-  //holds internal channel data, defaults to global channel
+  //current channelid being displayed
   const [currentChannel, setCurrentChannel]= useState(1)
-  //temporary  render untill currentChannel gets data
-  const [channelLoading, setChannelLoading] = useState(true)
+ //channel data
+  const [channelData, setChannelData] = useState(null) ;
+  const handleChannelData = (data) =>{
+    setChannelData(data);
+  }
+
 
   //LOGIC====================
   const redirect = useNavigate();
@@ -146,7 +150,9 @@ function App() {
         onLogout,
         auth,
         reAuth,
-        currentChannel
+        currentChannel,
+        channelData,
+        handleChannelData
       }}/>
       <MembersBar data={members} 
                   membersView={viewMembers}
