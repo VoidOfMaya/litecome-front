@@ -7,26 +7,30 @@ import {ToastContainer, Bounce} from 'react-toastify'
 import { notify } from './components/norifications/notifications';
 
 function App() {
+  //authentication state
+  const [auth, setAuth]= useState(null);//holds user auth data and tokens
+  
+  //component hide/show state:-
   const [channelView,setChannelView]=useState(true)//sidebar channel list display toggle
+  const [viewMembers,setViewMembers]=useState(false)//members list display toggle  
+  
+  //dashboard data states:-
   const [chnls, setChnls] = useState(null);//holds channel data user has
   const [members, setMembers] = useState(null);//list of channel members per channel
-  const [viewMembers,setViewMembers]=useState(true)//members list display toggle
-  const [auth, setAuth]= useState(null);//holds user auth data and tokens
-  // temporary loading state
-  const [authLoading, setLoadingAuth] = useState(true)
-  //current channelid being displayed
+  
+  //current Channel state:-
   const [currentChannel, setCurrentChannel]= useState(1)
+  const [channelData, setChannelData] = useState(null) ;
+
+  // temporary loading states :-
+  const [chatLoader, setChatLoader] = useState(true);
+  const [authLoading, setLoadingAuth] = useState(true)
+
+  //state handler Functions
   const handleCurrentChannel = (id) =>{
     setCurrentChannel(id);
   }
- //channel data
-  const [channelData, setChannelData] = useState(null) ;
-  const [chatLoader, setChatLoader] = useState(true);
-  const handleChatLoader = () =>{
-    setChatLoader(!chatLoader);
-  }
-
-  //LOGIC====================
+//authentication:-
   const redirect = useNavigate();
   const onLogout= ()=>{
     localStorage.clear();
@@ -41,7 +45,6 @@ function App() {
     localStorage.setItem('has_session', 'true');
     redirect('/chatter')
   }
-  //handels reauthentication without login{so long as refresh token valid}
   const refresh = async ()=>{
     try{
       //checks if has session flag exists in local storage befor fetching data
@@ -90,6 +93,7 @@ function App() {
         return
       }
   }
+// App Data:-
   //fetches user, cahnnels,friends info to populate user dashboard
   const getDashbaordData = async(token)=>{
     const response = await fetch('http://localhost:3000/user/me',{
@@ -121,7 +125,7 @@ function App() {
           redirect('/')
       }
   }
-
+//Effects:-
   useEffect(()=>{
     const initAuth = async() =>{
       //intial onload page refresh
@@ -176,13 +180,13 @@ function App() {
     if(!channelData)return
     setMembers(channelData.members)
   },[channelData])
+// render while loading
   if(authLoading){
     return <div>Loading ...</div>
   }
-
+//main render
   return (
-    <>
-    
+    <> 
       <div className={style.appContainer}>      
       <SideBar  channelView={channelView} 
       triggerChannelView={setChannelView}

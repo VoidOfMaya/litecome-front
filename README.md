@@ -3,6 +3,9 @@
 ## Overview:
 Litecome is a simple messaging webapp
 
+server to client integration tracker:[intigration doc](./Docs/featureIntegrations.md)
+
+
 ## Tech stack/Tools:
 - Vite
 - React
