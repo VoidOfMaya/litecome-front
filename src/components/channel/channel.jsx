@@ -5,19 +5,26 @@ import {messages} from '../../mock/data'; // is a mock file simulating backend d
 import { ChatLog } from './chatlog/chatlog';
 import { redirect, useNavigate, useOutletContext } from 'react-router-dom';
 import { notify } from '../norifications/notifications';
+import { FriendsIcon, GroupIcon } from '../iconhelper/iconHelper';
 
 const Channel = () =>{
     //context
     const{ 
         auth, 
         channelData,
-        chatLoader
+        chatLoader,
+        goTo
     }= useOutletContext();
     const direct = useNavigate();
 
     //handels sidebar interactive actions touch and click
     const [chnlMsgs, setChnlMsgs] = useState(null);
     //on initialization
+    //get friend id:
+    const getFriendId = (data) =>{
+        return data.members.find(member=>member.user.id !== auth.user.id)
+
+    }
     useEffect(()=>{
         if(!auth) direct('/')
         setChnlMsgs(messages);
@@ -35,6 +42,39 @@ const Channel = () =>{
     }
     return(
         <main className={style.channel}>
+            <div className={style.channelBanner}>
+                {channelData.type === 'FRIEND'?(
+                    <div style={{marginLeft: '20px'}}>
+                        <FriendsIcon size={40} 
+                        fn={()=>{
+                            try {
+                                console.log('start');
+
+                                const friend = getFriendId(channelData);
+
+                                console.log(friend);
+
+                                console.log(
+                                    'navigating to',
+                                    `/profile/${friend.user.id}`
+                                );
+
+                                goTo(`/profile/${friend.user.id}`);
+
+                                console.log('end');
+                            } catch(err) {
+                                console.error(err);
+                            }
+                        }}
+                        />                    
+                    </div>
+                ):(
+                    <div style={{marginLeft: '20px'}}>
+                        <GroupIcon size={40}/>                   
+                    </div>
+                )}
+                <div style={{alignSelf: 'center'}}> {channelData.name}</div>
+            </div>
             <div className={style.chatDisplay}> 
                 {chnlMsgs? (
                     <ChatLog messages={channelData.messages} users={channelData.members} />                       

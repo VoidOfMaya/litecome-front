@@ -125,6 +125,10 @@ function App() {
           redirect('/')
       }
   }
+//app navigationn
+  const goTo = (path) =>{
+    redirect(path)
+  }
 //Effects:-
   useEffect(()=>{
     const initAuth = async() =>{
@@ -184,7 +188,7 @@ function App() {
   if(authLoading){
     return <div>Loading ...</div>
   }
-//main render
+//main render 
   return (
     <> 
       <div className={style.appContainer}>      
@@ -202,7 +206,8 @@ function App() {
         currentChannel,
         handleCurrentChannel,
         channelData,
-        chatLoader
+        chatLoader,
+        goTo
 
       }}/>
       <MembersBar data={members} 

@@ -9,7 +9,7 @@ const Profile = () =>{
 /*
 user data:{id, email, name, bio, photo, is_online, last_login, created_at}
 */
-    const {auth, reAuth,currentChannel}= useOutletContext();
+    const {auth, reAuth,currentChannel, goTo}= useOutletContext();
     const redirect = useNavigate();
     const{profileId}= useParams();
     const [user, setUser] = useState({       
@@ -27,7 +27,7 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
     const [loadingData, setLoadingData] = useState(true);
     const [onlineStatus, setOnlineStatus] = useState(null);
   
-
+    console.log(profileId)
 
     const photoLogo = () =>{
         return(
@@ -135,19 +135,39 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
     }
     const getProfileData = async () =>{
         setLoadingData(true)
-        try{
-            const response = await fetch('http://localhost:3000/user/me/profile',{
-                method: 'GET',
-                headers: {
-                    "Authorization": `Bearer ${auth.accessToken}`,
-                },
-            })
-            reAuth(response);
-            return await response.json()
+        if(!profileId) return notify.error('No profile found!')
+        if(profileId === 'me'){
+            try{
+                const response = await fetch('http://localhost:3000/user/me/profile',{
+                    method: 'GET',
+                    headers: {
+                        "Authorization": `Bearer ${auth.accessToken}`,
+                    },
+                })
+                reAuth(response);
+                return await response.json()
 
-        }catch(err){
-            console.log(err)
+            }catch(err){
+                console.log(err)
+                notify.error(err)
+            }  
+        }else{
+            try{
+                const response = await fetch(`http://localhost:3000/user/${profileId}`,{
+                    method: 'GET',
+                    headers: {
+                        "Authorization": `Bearer ${auth.accessToken}`,
+                    },
+                })
+                reAuth(response);
+                return await response.json()
+
+            }catch(err){
+                console.log(err)
+                notify.error(err)
+            }  
         }
+
     }
     useEffect(()=>{
     },[currentChannel])
@@ -157,6 +177,7 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
         const loadProfile = async() =>{
             setLoadingData(true)
             const profileData = await getProfileData();
+            console.log(profileData)
             setUser(profileData);
             setOnlineStatus(user.is_online);
             setLoadingData(false)
@@ -167,44 +188,72 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
     if(loadingData){
         return(<div>Loading ....</div>)
     }
-    return(
-        <> 
-        <main className={style.main}> 
-                {editMode? (
-                    <>{editProfile()}</>
-                ):(
-                    <>
-                    <div className={style.profile}>
-                            <div className={style.editICon}
-                                onClick={()=> {
-                                        setFormData({
-                                            name: user.name,
-                                            bio: user.bio,
-                                            photo: user.photo
-                                        });
-                                    setEditMode(true)
-                                    }
-                                }>
-                                <EditeProfile size={35} color="#5a5a5a" focusColor="#ffffff" />                    
-                            </div>
-                            <div style={{display: 'flex', padding: '10px'}}>
-                                {photoLogo()}
-                                <div style={{padding: '10px'}} >
-                                    <p className={style.dataTxt}> {user.bio}</p>
+    //handels current user profile:
+    if(!profileId){
+        notify.error('Something went wrong,can not view profile')
+        goTo('/chatter')
+    }
+    if(profileId === 'me'){
+        return(
+            <> 
+            <main className={style.main}> 
+                    {editMode? (
+                        <>{editProfile()}</>
+                    ):(
+                        <>
+                        <div className={style.profile}>
+                                <div className={style.editICon}
+                                    onClick={()=> {
+                                            setFormData({
+                                                name: user.name,
+                                                bio: user.bio,
+                                                photo: user.photo
+                                            });
+                                        setEditMode(true)
+                                        }
+                                    }>
+                                    <EditeProfile size={35} color="#5a5a5a" focusColor="#ffffff" />                    
                                 </div>
+                                <div style={{display: 'flex', padding: '10px'}}>
+                                    {photoLogo()}
+                                    <div style={{padding: '10px'}} >
+                                        <p className={style.dataTxt}> {user.bio}</p>
+                                    </div>
+                                </div>
+                                <div className={style.profileData}>
+                                    user:<div className={style.dataTxt}>{user.email}</div>
+                                    name:<div className={style.dataTxt}>{user.name}</div>
+                                
+                                    created at:<div className={style.dataTxt}>{user.createdAt}</div>                        
+                                </div>
+                        </div>
+                        </>
+                    )}
+            </main>
+            </>
+        )
+    }else{
+        return(
+            <> 
+            <main className={style.main}> 
+                <div className={style.profile}>
+                        <div style={{display: 'flex', padding: '10px'}}>
+                            {photoLogo()}
+                            <div style={{padding: '10px'}} >
+                                <p className={style.dataTxt}> {!user.bio?('no bio yet'):(user.bio)}</p>
                             </div>
-                            <div className={style.profileData}>
-                                user:<div className={style.dataTxt}>{user.email}</div>
-                                name:<div className={style.dataTxt}>{user.name}</div>
-                            
-                                created at:<div className={style.dataTxt}>{user.createdAt}</div>                        
-                            </div>
-                    </div>
-                    </>
-                )}
-        </main>
-        </>
-    )
+                        </div>
+                        <div className={style.profileData}>
+                            user:<div className={style.dataTxt}>{user.email}</div>
+                            name:<div className={style.dataTxt}>{user.name}</div>          
+                            created at:<div className={style.dataTxt}>{user.createdAt}</div>                        
+                        </div>
+                </div>
+            </main>
+            </>
+        )   
+    }
+
 }
 export{
     Profile
