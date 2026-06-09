@@ -26,8 +26,7 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
     const [editMode, setEditMode] = useState(false);
     const [loadingData, setLoadingData] = useState(true);
     const [onlineStatus, setOnlineStatus] = useState(null);
-  
-    console.log(profileId)
+
 
     const photoLogo = () =>{
         return(
@@ -148,8 +147,8 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
                 return await response.json()
 
             }catch(err){
-                console.log(err)
-                notify.error(err)
+                console.log(err.message)
+                notify.error(err.message)
             }  
         }else{
             try{
@@ -163,8 +162,8 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
                 return await response.json()
 
             }catch(err){
-                console.log(err)
-                notify.error(err)
+                console.log(err.message)
+                notify.error(err.message)
             }  
         }
 
@@ -177,7 +176,6 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
         const loadProfile = async() =>{
             setLoadingData(true)
             const profileData = await getProfileData();
-            console.log(profileData)
             setUser(profileData);
             setOnlineStatus(user.is_online);
             setLoadingData(false)

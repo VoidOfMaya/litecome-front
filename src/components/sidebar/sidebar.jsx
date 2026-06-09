@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
 import { useState } from 'react';
 
-const SideBar = ({chnls, channelView, triggerChannelView, auth,loadChannel}) =>{
+const SideBar = ({chnls, channelView, triggerChannelView, auth,loadChannel, toggleProfile}) =>{
     const [friends, setFriends]= useState(true);
     const [groups, setGroups]= useState(false)
     const redirect = useNavigate();
@@ -134,7 +134,10 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth,loadChannel}) =>{
                             color={'#27282c'}         
                             focusColor={'#62646b'} 
                             size={25}
-                            fn={()=>redirect('/profile/me')}
+                            fn={()=>{
+                                toggleProfile();
+                                redirect('/profile/me')
+                            }}
                             />
                         </div>
                         <div onClick={()=>{

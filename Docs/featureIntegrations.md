@@ -13,7 +13,7 @@ required for app functionality orgenized by feature
     -[X]get current user dashbaord
     -[X]get current user profile
     -[X]edit current user profile
-    -[]get other user profile
+    -[X]get other user profile
 ### Friends
     -[] get friends
     -[]get friend by id

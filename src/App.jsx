@@ -26,9 +26,15 @@ function App() {
   const [chatLoader, setChatLoader] = useState(true);
   const [authLoading, setLoadingAuth] = useState(true)
 
+  //checks if on profile components
+  const [isProfile, setIsProfile] = useState(false);
+
   //state handler Functions
   const handleCurrentChannel = (id) =>{
     setCurrentChannel(id);
+  }
+  const checkProfile = () =>{
+    setIsProfile(!isProfile)
   }
 //authentication:-
   const redirect = useNavigate();
@@ -197,6 +203,7 @@ function App() {
                 chnls={chnls} 
                 auth={auth}
                 loadChannel={handleCurrentChannel}
+                toggleProfile ={isProfile}
                 />
       <Outlet context={{
         onLoginSuccess,
@@ -207,6 +214,9 @@ function App() {
         handleCurrentChannel,
         channelData,
         chatLoader,
+        isProfile,
+        checkProfile,
+
         goTo
 
       }}/>
@@ -214,6 +224,9 @@ function App() {
                   membersView={viewMembers}
                   triggerViewMember={setViewMembers} 
                   auth={auth}
+                  setProfile={isProfile}
+                  profile={isProfile}
+
                   />
       </div>
       <ToastContainer

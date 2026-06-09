@@ -21,6 +21,11 @@
 .membersBtn{
     display: none;
 }
+.memberCard{
+    color: white;
+}
+.modCard{ color: green;}
+.meCard{ color: #487cff}
 /*arrow functions*/
 .closeChannels{
     position: absolute;
