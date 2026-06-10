@@ -26,17 +26,11 @@ function App() {
   const [chatLoader, setChatLoader] = useState(true);
   const [authLoading, setLoadingAuth] = useState(true)
 
-  //checks if on profile components
-  const [isProfile, setIsProfile] = useState(false);
-
   //state handler Functions
   const handleCurrentChannel = (id) =>{
     setCurrentChannel(id);
   }
-  const checkProfile = () =>{
-    setIsProfile(!isProfile)
-  }
-//authentication:-
+  //authentication:-
   const redirect = useNavigate();
   const onLogout= ()=>{
     localStorage.clear();
@@ -99,7 +93,7 @@ function App() {
         return
       }
   }
-// App Data:-
+  // App Data:-
   //fetches user, cahnnels,friends info to populate user dashboard
   const getDashbaordData = async(token)=>{
     const response = await fetch('http://localhost:3000/user/me',{
@@ -197,37 +191,31 @@ function App() {
 //main render 
   return (
     <> 
-      <div className={style.appContainer}>      
-      <SideBar  channelView={channelView} 
-      triggerChannelView={setChannelView}
-                chnls={chnls} 
-                auth={auth}
-                loadChannel={handleCurrentChannel}
-                toggleProfile ={isProfile}
-                />
-      <Outlet context={{
-        onLoginSuccess,
-        onLogout,
-        auth,
-        reAuth,
-        currentChannel,
-        handleCurrentChannel,
-        channelData,
-        chatLoader,
-        isProfile,
-        checkProfile,
-
-        goTo
-
-      }}/>
-      <MembersBar data={members} 
-                  membersView={viewMembers}
-                  triggerViewMember={setViewMembers} 
+      <div className={currentChannel? style.appContainer : style.appContainerProfile}>      
+        <SideBar  channelView={channelView} 
+        triggerChannelView={setChannelView}
+                  chnls={chnls} 
                   auth={auth}
-                  setProfile={isProfile}
-                  profile={isProfile}
-
+                  loadChannel={handleCurrentChannel}
                   />
+        <Outlet context={{
+          onLoginSuccess,
+          onLogout,
+          auth,
+          reAuth,
+          currentChannel,
+          handleCurrentChannel,
+          channelData,
+          chatLoader,
+          goTo
+
+        }}/>
+        <MembersBar data={members} 
+                    membersView={viewMembers}
+                    triggerViewMember={setViewMembers} 
+                    auth={auth}
+                    currentChannel={currentChannel}
+                    />
       </div>
       <ToastContainer
         theme='colored'

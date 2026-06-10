@@ -9,7 +9,7 @@ const Profile = () =>{
 /*
 user data:{id, email, name, bio, photo, is_online, last_login, created_at}
 */
-    const {auth, reAuth,currentChannel, goTo}= useOutletContext();
+    const {auth, reAuth,currentChannel,handleCurrentChannel,goTo}= useOutletContext();
     const redirect = useNavigate();
     const{profileId}= useParams();
     const [user, setUser] = useState({       
@@ -17,7 +17,7 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
         bio: '',
         photo: ''
     });
-  const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState({
         name: user.name,
         bio: user.bio,
         photo: user.photo
@@ -169,7 +169,11 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
 
     }
     useEffect(()=>{
-    },[currentChannel])
+        if(profileId){
+            console.log(`user profile detected`)
+            handleCurrentChannel(null)
+        }
+    },[profileId])
     useEffect(()=>{
         if (!auth) return redirect('/');
         
@@ -233,6 +237,7 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
     }else{
         return(
             <> 
+            {console.log(`current channel: ${currentChannel}`)}
             <main className={style.main}> 
                 <div className={style.profile}>
                         <div style={{display: 'flex', padding: '10px'}}>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
 
-const MembersBar = ({data, membersView, triggerViewMember,auth,setProfile, profile}) =>{
+const MembersBar = ({data, membersView, triggerViewMember,auth,currentChannel}) =>{
     const toggelMembersView=()=>{
         triggerViewMember(!membersView);
     }
@@ -31,25 +31,24 @@ const MembersBar = ({data, membersView, triggerViewMember,auth,setProfile, profi
     const populateMembers=()=>{
         if (!data) return 'no members yet!'
         return data.map(member =>{
-                    return(
-                        <div key={member.user.id} 
-                            className={`${style.memberCard}
-                            ${member.user.id === auth.user.id?style.meCard:''}
-                            ${member.isMod? style.modCard:''}
-                            `}
-                        >
-                            @{member.user.name}
-                        </div>
-                    )
-                }) 
+            return(
+                <div key={member.user.id} 
+                    className={`${style.memberCard}
+                    ${member.user.id === auth.user.id?style.meCard:''}
+                    ${member.isMod? style.modCard:''}
+                    `}
+                >
+                    @{member.user.name}
+                </div>
+            )
+        }) 
     }
-    //`${style.groupMembers} ${membersView? style.open: style.close}`}
-    //`${style.membersContainer} ${membersView? style.open: style.close}`
     return(
         <>
             {auth? (
                 <>
-                    {/*<div className={style.membersContainer} {...swipeMembersBar}>*/}
+                    <div className={`${style.membersContainer} ${currentChannel? style.open: style.close}`}
+                        {...swipeMembersBar}>
                         <div className={`${style.groupMembers} ${membersView? style.open: style.close}`}>
                             <div className={style.title}>
                                 <GroupIcon size={35} />
@@ -57,18 +56,9 @@ const MembersBar = ({data, membersView, triggerViewMember,auth,setProfile, profi
                             </div>
                             {populateMembers()}
                         </div>
-                        {/*!membersView? (
-                            <div className={style.closeChannels}>
-                            <LeftArrow size={40} fn={toggelMembersView}/>
-                            </div>  
-                        ):(
-                            <div className={style.openChannels}>
-                            <RightArrow size={40} fn={toggelMembersView}/> 
-                            </div>                       
-                        )*/}
-                            
-                    {/*</div>*/ }
-                    {toggleArrows()}
+                        {toggleArrows()}   
+                    </div>
+                    
                 </>               
             ):(
                 <></>
