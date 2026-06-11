@@ -28,8 +28,10 @@ const Channel = () =>{
         return data.members.find(member=>member.user.id !== auth.user.id)
 
     }
+  
     useEffect(()=>{
         if(!auth) return redirect('/');
+        if(!messageIndicator) return;
         const loadChannel = async() =>{
             const result = await getChatlog(currentChannel)
             populateChannelData(result)
@@ -41,8 +43,11 @@ const Channel = () =>{
     useEffect(()=>{
         if(!auth) return direct('/')
         if(!channelData)return
-        console.log('inside channel component')
-        setChnlMsgs(channelData.messages)
+        console.log(channelData.messages)
+        const sortedChat = channelData.messages.sort(
+            (a,b)=> new Date(a.createdAt) - new Date(b.createdAt)
+        )  
+        setChnlMsgs(sortedChat)
     },[channelData])
     //handels loading states on init and on new message
     if(chatLoader && !chnlMsgs){
