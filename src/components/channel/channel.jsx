@@ -35,6 +35,9 @@ const Channel = () =>{
     const cancleReply = () =>{
         setReply(null)
     }
+    const getMods = () =>{
+        return channelData.members.filter(user => user.isMod)
+    }
   
     useEffect(()=>{
         if(!auth) return redirect('/');
@@ -103,7 +106,7 @@ const Channel = () =>{
             </div>
             <div className={style.chatDisplay}> 
                 {chnlMsgs? (
-                    <ChatLog messages={channelData.messages} handleReply={handleReply} /*users={channelData.members}*/ />                       
+                    <ChatLog messages={channelData.messages} handleReply={handleReply} Mods={getMods}/*users={channelData.members}*/ />                       
                 ):('no chat open!')}    
             </div>
             <ChatInterface needsUpdate={setMessageIndicator}  reply={reply} cancleReply={cancleReply}/>

@@ -1,12 +1,13 @@
 import { useOutletContext } from 'react-router-dom'
-import { BlockeIcon, EditeProfile, ReplyIcon, ReplyTo, UserIcon } from '../../iconhelper/iconHelper'
+import { BlockeIcon, DeletetIcon, EditMessage, ReplyTo, UserIcon } from '../../iconhelper/iconHelper'
 import style from './chatlog.module.css'
 import { useRef, useEffect } from 'react'
-const ChatLog=({messages, handleReply})=>{
+const ChatLog=({messages, handleReply, Mods})=>{
     const {auth} = useOutletContext();
     const chatRef = useRef(null);
 
     const populateChat =(messages)=>{
+        const mods = Mods();
         return messages.map( msg=>{
             return msg.parent? (
                 <div key={msg.id} className={style.msgCardReply}>
@@ -14,8 +15,17 @@ const ChatLog=({messages, handleReply})=>{
                         <ReplyTo size={25} focusColor='#f34900' fn={()=>{
                             handleReply({id: msg.id, name: msg.user.name})
                         }}/>
-                        <EditeProfile size={25} focusColor='#f34900' />
-                        <BlockeIcon size={25} focusColor='#f34900'/>
+                        {/*Author only privilage*/}
+                        {msg.user.id === auth.user.id?(
+                            <EditMessage size={25} focusColor='#f34900' />                            
+                        ):('')}
+                        {/*Author and Mod only privilage*/}
+                        {msg.user.id === auth.user.id || mods.some(mod => mod.user.id === auth.user.id)?
+                        (
+                            <DeletetIcon size={25} focusColor='#f34900'/>
+                        ):('')
+                        }
+
                     </div>       
                     <div key={msg.parent.id} className={style.replyMsg}>
                         reply to: 
@@ -63,8 +73,16 @@ const ChatLog=({messages, handleReply})=>{
                         <ReplyTo size={25} focusColor='#f34900' fn={()=>{
                             handleReply({id: msg.id, name: msg.user.name})
                         }}/>
-                        <EditeProfile size={25} focusColor='#f34900' />
-                        <BlockeIcon size={25} focusColor='#f34900'/>
+                        {/*Author only privilage*/}
+                        {msg.user.id === auth.user.id?(
+                        <EditMessage size={25} focusColor='#f34900' />                            
+                        ):('')}
+                        {/*Author and Mod only privilage*/}
+                        {msg.user.id === auth.user.id || mods.some(mod => mod.user.id === auth.user.id)?
+                        (
+                            <DeletetIcon size={25} focusColor='#f34900'/>
+                        ):('')
+                        }
                     </div>
                     <div className={style.msgTxt}>{msg.content}</div>
                     <div className={style.msgDate}>{msg.createdAt}</div>
