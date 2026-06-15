@@ -117,6 +117,7 @@ const Channel = () =>{
             <div className={style.chatDisplay}> 
                 {chnlMsgs? (
                     <ChatLog messages={channelData.messages} 
+                            needsUpdate={setMessageIndicator}
                             handleReply={handleReply} 
                             Mods={getMods} 
                             handleEditing={handleEditing}/>                       

@@ -1,13 +1,48 @@
 import { useOutletContext } from 'react-router-dom'
-import { BlockeIcon, DeletetIcon, EditMessage, ReplyTo, UserIcon } from '../../iconhelper/iconHelper'
+import {DeletetIcon, EditMessage, ReplyTo, UserIcon } from '../../iconhelper/iconHelper'
 import style from './chatlog.module.css'
 import { useRef, useEffect } from 'react'
-const ChatLog=({messages, handleReply, Mods, handleEditing})=>{
-    const {auth} = useOutletContext();
+import { notify
+
+ } from '../../norifications/notifications'
+const ChatLog=({messages, handleReply, Mods, needsUpdate, handleEditing})=>{
+    const {auth, reAuth, currentChannel} = useOutletContext();
+
+
     const chatRef = useRef(null);
     const mods = Mods();
-    const deleteMessage = () =>{
+    const deleteMessage = async (id) =>{
+        console.log(`start delete`)
+        try{
+            const result = await fetch(`http://localhost:3000/channel/${currentChannel}/msgs`,{
+                method: "DELETE",
+                body: JSON.stringify({
+                    id: id,
+                }),
+                headers: {
+                    "Content-Type": 'application/json',
+                    "Authorization": `Bearer ${auth.accessToken}`,
+                },
+            })
+            reAuth(result)
+            if(!result.ok){
 
+                const errBody = await result.json();
+                if(Array.isArray(errBody.errors)){
+                    errBody.errors.map(error =>{ 
+                        notify.error(error.msg)
+                    })
+                }
+                console.log(errBody)
+                throw new Error (`${errBody.msg}`)
+            }
+            needsUpdate(true)
+            console.log(`delete successful`)
+            return await result.json();
+        }catch(err){
+            notify.error(err.message)
+            console.log(err)
+        }
     }
     const populateChat =(messages)=>{
         return messages.map( msg=>{
@@ -24,7 +59,11 @@ const ChatLog=({messages, handleReply, Mods, handleEditing})=>{
                         {/*Author and Mod only privilage*/}
                         {msg.user.id === auth.user.id || mods.some(mod => mod.user.id === auth.user.id)?
                         (
-                            <DeletetIcon size={25} focusColor='#f34900'/>
+                            <DeletetIcon size={25} focusColor='#f34900' fn={ async()=>{
+                                if(!window.confirm('Delete this message?')) return;
+                                await deleteMessage(msg.id)
+
+                            }}/>
                         ):('')
                         }
 
@@ -82,7 +121,11 @@ const ChatLog=({messages, handleReply, Mods, handleEditing})=>{
                         {/*Author and Mod only privilage*/}
                         {msg.user.id === auth.user.id || mods.some(mod => mod.user.id === auth.user.id)?
                         (
-                            <DeletetIcon size={25} focusColor='#f34900'/>
+                            <DeletetIcon size={25} focusColor='#f34900'fn={ async()=>{
+                                if(!window.confirm('Delete this message?')) return;
+                                await deleteMessage(msg.id)
+
+                            }}/>
                         ):('')
                         }
                     </div>

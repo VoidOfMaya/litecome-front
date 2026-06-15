@@ -105,72 +105,76 @@ const ChatInterface = ({needsUpdate, reply, cancleReply, editMode, resetEditor})
  
             { editMode?(                
                 <>
-                {/*handels editing mode*/}
-                <div className={style.replyIndecator}>
-                    Edite mode
-                    <button style={{marginLeft: 'auto'}}
-                    type='button'
-                    onClick={()=>{
-                        if(!editMode) return
-                        setMessage('')
-                        resetEditor()
-                    }}
-                    >x</button>
-                </div>
-                <button htmlFor='message' className={`${style.msgButton} ${style.rightBtn}`}>+</button>
-                <div className={style.textWrapper}>
-                    <textarea id='message' 
-                        name='message' 
-                        className={style.msgTxtArea} 
-                        placeholder='message @Group'
-                        value={message}
-                            onChange={(e)=>
-                                setMessage(e.target.value)
-                            }
-                        >
-                    </textarea>
-                </div>
-                <button htmlFor='message' 
-                        className={`${style.msgButton} ${style.leftBtn}`}
-                        onClick={ async()=> {
-                            await editMessage(message, editMode.id) 
-                            if(reply) cancleReply();
-                            
+                    {/*handels editing mode*/}
+                    <div className={style.replyIndecator}>
+                        Edite mode
+                        <button style={{marginLeft: 'auto'}}
+                        type='button'
+                        onClick={()=>{
+                            console.log(` button clicked,edit mode true: ${editMode}`)
+                            if(!editMode) return
+                            setMessage('')
+                            resetEditor()
                         }}
-                        >
-                    {/*to change focuse color, open local css file*/}
-                    <SendIcon color={'white'} 
-                            size={24} />
-                </button>
+                        >x</button>
+                    </div>
+                    <button htmlFor='message' className={`${style.msgButton} ${style.rightBtn}`}>+</button>
+                    <div className={style.textWrapper}>
+                        <textarea id='message' 
+                            name='message' 
+                            className={style.msgTxtArea} 
+                            placeholder='message @Group'
+                            value={message}
+                                onChange={(e)=>
+                                    setMessage(e.target.value)
+                                }
+                            >
+                        </textarea>
+                    </div>
+                    <button htmlFor='message' 
+                            className={`${style.msgButton} ${style.leftBtn}`}
+                            onClick={ async()=> {
+                                await editMessage(message, editMode.id) 
+                                if(!reply) return
+                                cancleReply();
+                                
+                            }}
+                            >
+                        {/*to change focuse color, open local css file*/}
+                        <SendIcon color={'white'} 
+                                size={24} />
+                    </button>
                 </>
             ):(
                 <>
-                {/*handels send mode*/}
-                <button htmlFor='message' className={`${style.msgButton} ${style.rightBtn}`}>+</button>
-                <div className={style.textWrapper}>
-                    <textarea id='message' 
-                        name='message' 
-                        className={style.msgTxtArea} 
-                        placeholder='message @Group'
-                        value={message}
-                            onChange={(e)=>
-                                setMessage(e.target.value)
-                            }
-                        >
-                    </textarea>
-                </div>
-                <button htmlFor='message' 
-                        className={`${style.msgButton} ${style.leftBtn}`}
-                        onClick={ async()=> {
-                            await sendMessage(message, reply.id) 
-                            if(reply) cancleReply();
-                            
-                        }}
-                        >
-                    {/*to change focuse color, open local css file*/}
-                    <SendIcon color={'white'} 
-                            size={24} />
-                </button>
+                    {/*handels send mode*/}
+                    <button htmlFor='message' className={`${style.msgButton} ${style.rightBtn}`}>+</button>
+                    <div className={style.textWrapper}>
+                        <textarea id='message' 
+                            name='message' 
+                            className={style.msgTxtArea} 
+                            placeholder='message @Group'
+                            value={message}
+                                onChange={(e)=>
+                                    setMessage(e.target.value)
+                                }
+                            >
+                        </textarea>
+                    </div>
+                    <button htmlFor='message' 
+                            className={`${style.msgButton} ${style.leftBtn}`}
+                            onClick={ async()=> {
+                                console.log(` button clicked,edit mode true: ${editMode}`)
+                                await sendMessage(message, reply?.id) 
+                                if(!reply) return
+                                cancleReply();
+                                
+                            }}
+                            >
+                        {/*to change focuse color, open local css file*/}
+                        <SendIcon color={'white'} 
+                                size={24} />
+                    </button>
                 </>
             )}
         </div>

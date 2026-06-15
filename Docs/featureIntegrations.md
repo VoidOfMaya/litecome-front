@@ -36,7 +36,7 @@ required for app functionality orgenized by feature
     -[] MOD: remove mod privillage
 ### Messages
     -[X]getChatlog
-    -[]edit message
-    -[]delete message
+    -[X]edit message
+    -[X]delete message
     -[X]send message
     -[X]send reply message
