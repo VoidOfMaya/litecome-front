@@ -226,7 +226,53 @@ const DeletetIcon = ({fn = null, color ='#27282c', focusColor='#62646b', size=25
         </svg>
     )
 }
-
+const Logout =({fn = null, color ='#27282c', focusColor='#62646b', size=25})=>{
+    const [focuse, setFocus]= useState(false);
+    return(
+        <svg xmlns="http://www.w3.org/2000/svg" 
+            height={`${size}px`}
+            viewBox="0 -960 960 960" 
+            width={`${size}px`}
+            fill={focuse? focusColor : color}
+                    onMouseEnter={()=>setFocus(true)}
+                    onMouseLeave={()=>setFocus(false)}
+            onClick={()=> fn? fn(): null}
+            ><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/>
+        </svg>
+    )
+}
+const PlusIcon =({fn = null, color ='#27282c', focusColor='#62646b', size=25})=>{
+    const [focuse, setFocus]= useState(false);
+    return(
+        <svg xmlns="http://www.w3.org/2000/svg" 
+            height={`${size}px`}
+            viewBox="0 -960 960 960" 
+            width={`${size}px`} 
+            fill={focuse? focusColor : color}
+                    onMouseEnter={()=>setFocus(true)}
+                    onMouseLeave={()=>setFocus(false)}
+            onClick={()=> fn? fn(): null}
+            >
+                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/>
+        </svg>
+    )
+}
+const ShieldIcon =({fn = null, color ='#27282c', focusColor='#62646b', size=25})=>{
+    const [focuse, setFocus]= useState(false);
+    return(
+        <svg xmlns="http://www.w3.org/2000/svg" 
+            height={`${size}px`} 
+            viewBox="0 -960 960 960" 
+            width={`${size}px`}
+            fill={focuse? focusColor : color}
+                    onMouseEnter={()=>setFocus(true)}
+                    onMouseLeave={()=>setFocus(false)}
+            onClick={()=> fn? fn(): null}
+            >
+                <path d="M480-80q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q104-33 172-132t68-220v-189l-240-90-240 90v189q0 121 68 220t172 132Zm0-316Z"/>
+        </svg>
+    )
+}
 export{
     LogoIcon,
     UserIcon,
@@ -241,5 +287,9 @@ export{
     BlockeIcon,
     ReplyTo,
     EditMessage,
-    DeletetIcon
+    DeletetIcon,
+    PlusIcon,
+    ShieldIcon,
+    Logout
+    
 }

@@ -34,6 +34,15 @@
 .channelList{
     width: 100%;
     text-align: center;
+    display: flex;
+    gap: 2px;
+}
+.listHeader{
+    display: flex;
+    flex-direction: row;
+    padding: 2px;
+    justify-content: center;
+    align-items: center;
 }
 .channelOption{
     display: grid;
@@ -50,6 +59,8 @@
     font-weight: 350;
     color: #62646b;
     font-size: .9em;
+    text-align: start;
+    align-items: center;
 
 }
 .channelOption:hover{

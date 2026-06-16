@@ -201,6 +201,7 @@ function App() {
                   chnls={chnls} 
                   auth={auth}
                   loadChannel={handleCurrentChannel}
+                  logout={onLogout}
                   />
         <Outlet context={{
           onLoginSuccess,

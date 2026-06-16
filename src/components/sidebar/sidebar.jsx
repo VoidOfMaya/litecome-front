@@ -7,13 +7,15 @@ import { UserIcon,
          LogoIcon,
          LeftArrow,
         RightArrow,
-        BlockeIcon} from '../iconhelper/iconHelper';
+        BlockeIcon,
+        Logout,
+        PlusIcon} from '../iconhelper/iconHelper';
 import { useSwipeable } from 'react-swipeable';
 import { useNavigate } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
 import { useState } from 'react';
 
-const SideBar = ({chnls, channelView, triggerChannelView, auth,loadChannel}) =>{
+const SideBar = ({chnls, channelView, triggerChannelView, auth,loadChannel, logout}) =>{
     const [friends, setFriends]= useState(true);
     const [groups, setGroups]= useState(false)
     const redirect = useNavigate();
@@ -98,7 +100,7 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth,loadChannel}) =>{
                     <div className={`${style.channelList} 
                         ${channelView? style.open: style.close}`}>
                             <h3 style={{color: '#62646b'}}>Friends</h3>
-                            {populateFrinds(chnls)}                         
+                            {populateFrinds(chnls)}
                     </div>
                     {/*toggole channel sidebar view on and off via arrows:*/}
                     {toggleChannelBar()}
@@ -110,7 +112,15 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth,loadChannel}) =>{
                 <>  
                     <div className={`${style.channelList} 
                         ${channelView? style.open: style.close}`}>
-                            <h3 style={{color: '#62646b'}}>Groups</h3>
+                            <div className={style.listHeader}>
+                                <h3 style={{color: '#62646b'}}>
+                                    Groups  
+                                </h3> 
+                                <div title='Create New channel'>
+                                    <PlusIcon />  
+                                </div>                                     
+                            </div>
+
                             {populateGroups(chnls)}                    
                     </div>
                     {/*toggole channel sidebar view on and off via arrows:*/}
@@ -118,17 +128,20 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth,loadChannel}) =>{
                 </> 
             )
         }
+
     }
 
     return(
         <div className={style.sideNav} {...swipeSidebar}>
             <div className={style.userNav}> 
-                <div className={style.logo} onClick={()=> redirect('/Chatter')}>
+                <div className={style.logo}
+                    title='Return to home page'
+                     onClick={()=> redirect('/Chatter')}>
                     Chatter<LogoIcon color={'#E84545'} size={25} />
                 </div> 
                 {auth? (
                     <>  
-                        <div>
+                        <div title='User Profile'>
                         <UserIcon 
                             color={'#27282c'}         
                             focusColor={'#62646b'} 
@@ -138,14 +151,18 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth,loadChannel}) =>{
                             }}
                             />
                         </div>
-                        <div onClick={()=>{
+                        <div
+                            title='View Friends list' 
+                            onClick={()=>{
                             if(friends)return
                             setGroups(false)
                             setFriends(true)
                         }}>
                             <FriendsIcon color={'#27282c'} focusColor={'#62646b'} size={25} />                            
                         </div>
-                        <div onClick={()=>{
+                        <div
+                            title='View Channels list'  
+                            onClick={()=>{
                             if(groups)return
                             setFriends(false)
                             setGroups(true)
@@ -153,8 +170,21 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth,loadChannel}) =>{
                             <GroupIcon color={'#27282c'} focusColor={'#62646b'} size={25} />
                         </div>
 
-                        <div></div>
-                        <SearchIcon color={'#27282c'} focusColor={'#62646b'} size={25} />                    
+                        <div title='search channels & users' >
+                            <SearchIcon color={'#27282c'} focusColor={'#62646b'} size={25} />                            
+                        </div>
+
+                        <div style={{marginTop: 'auto', paddingBottom: '20px'}}
+                             title='Logout'>
+                            <Logout color={'#27282c'} focusColor={'#62646b'} size={25}
+                                fn={()=>{
+                                    const confirm = window.confirm('This action will log you out of this device!')
+                                    if(!confirm) return
+                                    logout()
+                                }}
+                            />                          
+                        </div>   
+               
                     </>
                 ):(<></>)}                       
 

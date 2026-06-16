@@ -6,6 +6,7 @@ import App from './App.jsx'
 import { Signup } from './components/signup/signup.jsx'
 import { Channel } from './components/channel/channel.jsx'
 import { Profile } from './components/profile/profile.jsx'
+import { NotFound } from './components/404/404.jsx'
 
 
 //page routing
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
       {path:'/chatter', element:<Channel/>},
       {path: '/profile/:profileId', element:<Profile/>}
     ],
-    errorElement:<h1>Error Page!</h1>
+    errorElement:<NotFound />
   },
 ])
 

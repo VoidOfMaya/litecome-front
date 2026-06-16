@@ -4,7 +4,7 @@ import { ChatInterface } from './chatInterface/chatinterface';
 import { ChatLog } from './chatlog/chatlog';
 import { redirect, useNavigate, useOutletContext } from 'react-router-dom';
 import { notify } from '../norifications/notifications';
-import { FriendsIcon, GroupIcon } from '../iconhelper/iconHelper';
+import { FriendsIcon, GroupIcon, ShieldIcon } from '../iconhelper/iconHelper';
 
 const Channel = () =>{
     //context
@@ -109,10 +109,12 @@ const Channel = () =>{
                     </div>
                 ):(
                     <div style={{marginLeft: '20px'}}>
-                        <GroupIcon size={40}/>                   
+                        <GroupIcon size={40}/>                  
                     </div>
                 )}
                 <div style={{alignSelf: 'center'}}> {channelData.name}</div>
+                {/*check if current user is a mod on this channel*/}
+                <ShieldIcon size={40}/> 
             </div>
             <div className={style.chatDisplay}> 
                 {chnlMsgs? (

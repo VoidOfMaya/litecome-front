@@ -16,7 +16,9 @@ required for app functionality orgenized by feature
     -[X]get other user profile
 ### Friends
     -[] get friends
-    -[]get friend by id
+    -[]get friend by    
+      
+      
     -[]get pending friend requests
     -[]send friend request
     -[]accept friend request
