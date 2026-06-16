@@ -3,19 +3,30 @@
     grid-area: members; 
     position: relative;
     min-width: 150px;
-    display: flex;
+    display: grid;
+    background: linear-gradient(to right, #010101, #111111);
+    grid-template-rows: 1fr 19fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    'membersHeader'
+    'membersList';
 }
 .title{
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 16px;
+    grid-area: membersHeader;
 }
 .groupMembers{
     padding: 10px;
     font-weight: 200;
     color: #62646b;
     font-size: .8em;
+    grid-area: membersList;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .membersBtn{
@@ -31,20 +42,23 @@
     position: absolute;
     top: 50%;
     right: 0%;
-    border: 1px sol id green;
+    z-index: 10;
+    border: 2px solid red;
 }
 .openChannels{
     position: absolute;
     top: 50%;
     right: 100%;
+    z-index: 10;
+    border: 2px solid green;
 }
 /*variable for element display*/
 .close{
     display: none;
-    border: 1px solid green ;
+
 }
 .open{
-    display: block;
+    display: grid;
 }
 @media (max-width: 1200px) {
 

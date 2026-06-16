@@ -98,7 +98,10 @@ const SideBar = ({chnls, channelView, triggerChannelView, auth,loadChannel, logo
                 <>  
                     <div className={`${style.channelList} 
                         ${channelView? style.open: style.close}`}>
-                            <h3 style={{color: '#62646b'}}>Friends</h3>
+                            <div className={style.listHeader}>
+                                <h3 style={{color: '#62646b'}}>Friends</h3> 
+                            </div>
+                            
                             {populateFrinds(chnls)}
                     </div>
                     {/*toggole channel sidebar view on and off via arrows:*/}

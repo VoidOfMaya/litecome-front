@@ -32,12 +32,14 @@
     border-radius: 70px;
 }
 .channelList{
+    background: linear-gradient(to left, #010101, #111111);
     width: 100%;
     text-align: center;
     display: flex;
     gap: 2px;
 }
 .listHeader{
+    background-color: #0c0c0c;
     display: flex;
     flex-direction: row;
     padding: 2px;

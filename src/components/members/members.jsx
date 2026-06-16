@@ -13,6 +13,7 @@ const MembersBar = ({data, membersView, triggerViewMember,auth,currentChannel}) 
         onSwipedRight: () => triggerViewMember(false),
     });
     const toggleArrows = () =>{
+        console.log('membersView:', membersView)
         return(
             <>
                 {!membersView? (
@@ -47,17 +48,23 @@ const MembersBar = ({data, membersView, triggerViewMember,auth,currentChannel}) 
         <>
             {auth? (
                 <>
-                    <div className={`${style.membersContainer} ${currentChannel? style.open: style.close}`}
+                    {toggleArrows()}
+                    <div className={`
+                            ${style.membersContainer}
+                            ${membersView? style.open: style.close}
+                            ${currentChannel? `${membersView? style.open: style.close}`: style.close}
+                        `}
                         {...swipeMembersBar}>
-                        <div className={`${style.groupMembers} ${membersView? style.open: style.close}`}>
                             <div className={style.title}>
                                 <GroupIcon size={35} />
                                 Members                            
                             </div>
+                        <div className={style.groupMembers}>
+
                             {populateMembers()}
                         </div>
-                        {toggleArrows()}   
                     </div>
+                   
                     
                 </>               
             ):(
