@@ -1,5 +1,5 @@
 import { useOutletContext } from 'react-router-dom'
-import {DeletetIcon, EditMessage, ReplyTo, UserIcon } from '../../iconhelper/iconHelper'
+import {DeletetIcon, EditMessage, ReplyTo, ShieldIcon, UserIcon } from '../../iconhelper/iconHelper'
 import style from './chatlog.module.css'
 import { useRef, useEffect } from 'react'
 import { notify
@@ -65,7 +65,10 @@ const ChatLog=({messages, handleReply, isMod, needsUpdate, handleEditing})=>{
                             }}/>
                         ):('')
                         }
-
+                        {/*MOD only privillage*/}
+                        {isMod?(
+                            <ShieldIcon size={25} focusColor='#f34900'></ShieldIcon>
+                        ):('')}
                     </div>       
                     <div key={msg.parent.id} className={style.replyMsg}>
                         reply to: 
@@ -127,6 +130,9 @@ const ChatLog=({messages, handleReply, isMod, needsUpdate, handleEditing})=>{
                             }}/>
                         ):('')
                         }
+                        {isMod?(
+                            <ShieldIcon size={25} focusColor='#f34900'></ShieldIcon>
+                        ):('')}
                     </div>
                     <div className={style.msgTxt}>{msg.content}</div>
                     <div className={style.msgDate}>{msg.createdAt}</div>
