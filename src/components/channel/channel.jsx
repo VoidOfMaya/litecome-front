@@ -19,7 +19,7 @@ const Channel = () =>{
     }= useOutletContext();
     const direct = useNavigate();
 
-    //handels sidebar interactive actions touch and click
+    const [mods, setMods] = useState(null)
     const [chnlMsgs, setChnlMsgs] = useState(null);
     const [messageIndicator, setMessageIndicator]= useState(false);
     const [reply, setReply] = useState(null)
@@ -39,12 +39,16 @@ const Channel = () =>{
     const getMods = () =>{
         return channelData.members.filter(user => user.isMod)
     }
+    const isUserMod = (userId)=>{
+        return mods.some(record => record.user.id === userId)
+    }
     const handleEditing = (id, message)=>{
         setEditMode({id, message})
     }
     const resetEditor = () =>{
         setEditMode(null)
     }
+
   
     useEffect(()=>{
         if(!auth) return redirect('/');
@@ -64,6 +68,8 @@ const Channel = () =>{
             (a,b)=> new Date(a.createdAt) - new Date(b.createdAt)
         )  
         setChnlMsgs(sortedChat)
+        const modsList = getMods();
+        setMods(modsList)
     },[channelData])
     //handels loading states on init and on new message
     if(chatLoader && !chnlMsgs){
@@ -111,14 +117,17 @@ const Channel = () =>{
                 )}
                 <div style={{alignSelf: 'center'}}> {channelData.name}</div>
                 {/*check if current user is a mod on this channel*/}
-                <ShieldIcon size={40}/> 
+                {isUserMod(auth.user.id)? (
+                   <ShieldIcon size={30}/>  
+                ):('')}
+                
             </div>
             <div className={style.chatDisplay}> 
                 {chnlMsgs? (
                     <ChatLog messages={channelData.messages} 
                             needsUpdate={setMessageIndicator}
                             handleReply={handleReply} 
-                            Mods={getMods} 
+                            mods={mods} 
                             handleEditing={handleEditing}/>                       
                 ):('no chat open!')}    
             </div>

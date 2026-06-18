@@ -5,12 +5,11 @@ import { useRef, useEffect } from 'react'
 import { notify
 
  } from '../../norifications/notifications'
-const ChatLog=({messages, handleReply, Mods, needsUpdate, handleEditing})=>{
+const ChatLog=({messages, handleReply, mods, needsUpdate, handleEditing})=>{
     const {auth, reAuth, currentChannel} = useOutletContext();
 
 
     const chatRef = useRef(null);
-    const mods = Mods();
     const deleteMessage = async (id) =>{
         console.log(`start delete`)
         try{
