@@ -39,7 +39,24 @@ const Search=()=>{
         }
     }
     const searchGroups= async()=>{
-
+        try{
+            if(searchValue === '') throw new Error('no value provided')
+            const response = await fetch(`http://localhost:3000/channel/${searchValue}/info`,{
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${auth.accessToken}`,
+                },
+            })
+            reAuth(response);
+            const result = await response.json()
+            if(!response.ok){
+             return result.status
+            }
+            return result
+        }catch(err){
+            console.log(err.message)
+            notify.warn(err.message)
+        }
     }
     useEffect(()=>{
         const fetchData =async()=>{
