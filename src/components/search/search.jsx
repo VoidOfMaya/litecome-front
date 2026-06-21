@@ -1,17 +1,63 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchIcon } from '../iconhelper/iconHelper';
+import { notify } from '../norifications/notifications';
 import style from './search.module.css';
-
+import { useOutletContext } from 'react-router-dom';
+import { Card } from './searchCard/card';
 const Search=()=>{
+    const{ auth, reAuth}= useOutletContext();
+    const [searchValue, setSearchValue]= useState('');
     const [results, setResults] = useState(null);
-    const [searchFriend, setSearchFriend] = useState(true)
+    const [searchFriend, setSearchFriend] = useState(true);
+    const [loadingData,setLoadingData]= useState(false);
 
-    const searchUsers=()=>{
+    const populateResults=(data, searchType)=>{
+        if(!data) return
+        return(
+            <Card key={data.id} data={data} searchType={searchType} />
+        )
 
     }
-    const searchGroups =()=>{
-        
+    const searchUsers= async()=>{   
+        try{
+            if(searchValue === '') throw new Error('no value provided')
+            const response = await fetch(`http://localhost:3000/user/${searchValue}`,{
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${auth.accessToken}`,
+                },
+            })
+            reAuth(response);
+            const result = await response.json()
+            if(!response.ok){
+             return result.status
+            }
+            return result
+        }catch(err){
+            console.log(err.message)
+            notify.warn(err.message)
+        }
     }
+    const searchGroups= async()=>{
+
+    }
+    useEffect(()=>{
+        const fetchData =async()=>{
+            setLoadingData(true)
+             
+            if(searchFriend){
+                const result = await searchUsers(searchValue);
+                setResults(result) 
+                setLoadingData(false)  
+            }else{
+                const result = await searchGroups(searchValue);
+                setResults(result) 
+                setLoadingData(false)  
+            }                      
+        }
+        fetchData()
+
+    },[searchValue])
     return(
         <>
             <div className={style.mainContainer}>
@@ -29,23 +75,39 @@ const Search=()=>{
                         }}
                     >search goup</button>
                 </div>
-                <form className={style.searchBar}>
+                <div className={style.searchBar}>
                     {searchFriend?(
-                        <input placeholder='user Id'></input>
+                        <input placeholder='user Id'
+                            value={searchValue}
+                            onChange={(e)=>{
+                                setSearchValue(e.target.value)
+                            }}
+                        ></input>
                     ):(
-                        <input placeholder='group Id'></input>
+                        <input placeholder='group Id'
+                            value={searchValue}
+                            onChange={(e)=>{
+                                setSearchValue(e.target.value)
+                            }}></input>
                     )}
                     
-                    <button>
-                        <SearchIcon size={25}/>
-                    </button>      
-                </form>
+                    <div
+                    >
+                        {loadingData?(
+                            <div>Loading...</div>
+                        ):(
+                            <SearchIcon size={25}/>
+                        )}
+                        
+                    </div>     
+                </div>
                 <div className={style.searchResults}>
                     {results?(
                         <>
+                            {populateResults(results, searchFriend)}
                         </>
                     ):(
-                        'no results found'
+                        `no results found for: "${searchValue}"`
                     )}
 
                 </div>
