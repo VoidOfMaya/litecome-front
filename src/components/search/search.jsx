@@ -5,7 +5,7 @@ import style from './search.module.css';
 import { useOutletContext } from 'react-router-dom';
 import { Card } from './searchCard/card';
 const Search=()=>{
-    const{ auth, reAuth}= useOutletContext();
+    const{ auth, reAuth, handleCurrentChannel}= useOutletContext();
     const [searchValue, setSearchValue]= useState('');
     const [results, setResults] = useState(null);
     const [searchFriend, setSearchFriend] = useState(true);
@@ -75,6 +75,10 @@ const Search=()=>{
         fetchData()
 
     },[searchValue])
+    // sets current channel to null on init
+    useEffect(()=>{
+        handleCurrentChannel(null)
+    },[])
     return(
         <>
             <div className={style.mainContainer}>
