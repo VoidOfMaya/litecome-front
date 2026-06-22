@@ -31,6 +31,29 @@ const Card = ({data, searchType})=>{
 
         
     };
+    const sendGroupJoinRequest = async(id)=>{
+        try{
+            const response = await fetch(`http://localhost:3000/channel/${id}/joinReq`,{
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${auth.accessToken}`,
+                    },
+                })
+            reAuth(response);
+            if(!response.ok){
+                throw new Error(`${response.status}`)
+            }
+            const result = await response.json()
+            notify.success("request sent")
+            return result            
+        }catch(err){
+            console.log(err.message)
+            notify.warn(err.message)
+        }
+
+        
+    };
     if(searchType){
         // case where user searches other users
         return(
@@ -57,7 +80,7 @@ const Card = ({data, searchType})=>{
                             <button
                                 onClick={()=>{
                                     sendFriendRequest(data.id)
-                                }}>send request</button>
+                                }}>add friend</button>
                             <button>visit profile</button>
                         </>
                     )}
@@ -77,7 +100,10 @@ const Card = ({data, searchType})=>{
                 <GroupIcon size={45} />
                 <h3>{data.name}</h3>
                 <div className={style.options}>
-                    <button>send request</button>
+                    <button
+                    onClick={()=>{
+                        sendGroupJoinRequest(data.id)
+                    }}>join group</button>
                     <button>visit profile</button>
                 </div>
             
