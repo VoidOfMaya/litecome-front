@@ -87,6 +87,16 @@
 .open{
     display: block;
 }
+.inbox{
+    width: max-content;
+    background-color: #111111;
+    border: 1px solid #E84545;
+    padding: 5px 10px 5px 10px;
+}
+.inbox:hover{
+    cursor: pointer;
+    background-color: #E84545;
+}
 @media (max-width: 1200px){
     .closeChannels{
         left: 13em;

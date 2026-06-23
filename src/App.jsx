@@ -23,9 +23,13 @@ function App() {
   const [currentChannel, setCurrentChannel]= useState(1);
   const [channelData, setChannelData] = useState(null) ;
 
+  //inbox state:-
+  const [inbox, setInbox] = useState(null);
+
   // temporary loading states :-
   const [chatLoader, setChatLoader] = useState(true);
   const [authLoading, setLoadingAuth] = useState(true);
+
 
 
   //state handler Functions
@@ -130,6 +134,23 @@ function App() {
           redirect('/')
       }
   }
+  // fetch pending requests
+  const getPendingRequests= async(token) =>{
+    try{
+      const response = await fetch(`http://localhost:3000/friend/requests`,{
+        method: 'GET',
+        headers:{"Authorization": `Bearer ${token}`}
+      })
+      await reAuth(response);
+      const result = await response.json();
+      if(!response.ok) throw new Error(`${result.msg}`)
+  
+      return(result)
+    }catch(err){
+      notify.error(err)
+    }
+
+  }
 //app navigationn
   const goTo = (path) =>{
     redirect(path)
@@ -170,8 +191,13 @@ function App() {
           const result = await getChatlog(currentChannel);
           setChannelData(result)
       }
-      
-    loadDashboard()
+    const loadInbox = async() =>{
+      const result = await getPendingRequests(auth.accessToken);
+      console.log(result)
+      setInbox(result);
+    }
+    loadInbox();
+    loadDashboard();
     loadChannel();
   },[auth])
   useEffect(()=>{
@@ -215,6 +241,7 @@ function App() {
           channelData,
           populateChannelData,
           chatLoader,
+          inbox,
           goTo
 
         }}/>

@@ -110,6 +110,11 @@ const SideBar = (
                             <div className={style.listHeader}>
                                 <h3 style={{color: '#62646b'}}>Friends</h3> 
                             </div>
+                            <div className={style.inbox}
+                                onClick={()=>{
+                                    redirect('/inbox');
+                                }}
+                            >request inbox</div>
                             
                             {populateFrinds(chnls)}
                     </div>
