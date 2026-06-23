@@ -193,7 +193,6 @@ function App() {
       }
     const loadInbox = async() =>{
       const result = await getPendingRequests(auth.accessToken);
-      console.log(result)
       setInbox(result);
     }
     loadInbox();
