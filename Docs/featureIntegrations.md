@@ -21,7 +21,7 @@ required for app functionality orgenized by feature
     -[X]send friend request
     -[X]accept friend request
     -[X]reject friend request
-    -[]terminate friendship connection
+    -[X]terminate friendship connection
 ### Channels
     -[X]get channel by id 
     -[]create group channel
