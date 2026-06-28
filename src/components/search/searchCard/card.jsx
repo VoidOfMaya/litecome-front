@@ -4,7 +4,7 @@ import { useOutletContext} from "react-router-dom";
 import { notify } from "../../norifications/notifications";
 
 const Card = ({data, searchType})=>{
-    const {auth, reAuth, goTo,UpdateApp,handleCurrentChannel, chnls} = useOutletContext();
+    const {auth, reAuth, goTo,updateApp,handleCurrentChannel, chnls} = useOutletContext();
     const sendFriendRequest = async(id) =>{
         try{
             const response = await fetch(`http://localhost:3000/friend/send-request`,{
@@ -23,7 +23,7 @@ const Card = ({data, searchType})=>{
             }
             const result = await response.json()
             notify.success("request sent")
-            UpdateApp()          
+            updateApp()          
         }catch(err){
             console.log(err.message)
             notify.warn(err.message)

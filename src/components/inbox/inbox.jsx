@@ -4,8 +4,7 @@ import { BlockeIcon, PlusIcon, UserIcon } from "../iconhelper/iconHelper";
 import style from './inbox.module.css';
 import { notify } from "../norifications/notifications";
 const Inbox = () =>{
-    const{auth, reAuth,inbox, handleCurrentChannel,updateApp} = useOutletContext();
-    const [inboxContent, setInboxContent] = useState(null)
+    const{auth, reAuth,inbox,loadInbox, handleCurrentChannel,updateApp} = useOutletContext();
     const populateRequests = (requestArray) =>{
         if (!requestArray)return
         return requestArray.map((request)=>{
@@ -32,7 +31,7 @@ const Inbox = () =>{
                             <div className={style.options}>
                                 <div    title="accept request">
                                         <PlusIcon size={35} focusColor="green" fn={async()=>{
-                                            await acceptReq(request.id)          
+                                            await acceptReq(request.id)
                                         }}/>
                                 </div>
                                 <div title="reject request">
@@ -86,11 +85,12 @@ const Inbox = () =>{
             })
             await reAuth(response);
             const result = await response.json();
-            console.log(result)
             if(!response.ok) throw new Error(`${result.msg}`)
-        
+            console.log('befor notify')
             notify.success('friend added')
+            console.log('after notify')
             updateApp()
+            console.log('after update')
         }catch(err){
             notify.error(err)
         }
@@ -122,14 +122,9 @@ const Inbox = () =>{
     useEffect(()=>{
         console.log(inbox)
         handleCurrentChannel(null)
-        setInboxContent(inbox);
-        
+
     },[])
-    useEffect(()=>{
-        console.log(inboxContent)
-        setInboxContent(inbox);
-    },[inboxContent])
-    if(!inboxContent){
+    if(!inbox){
         return(
             <>
             Loading
@@ -140,13 +135,13 @@ const Inbox = () =>{
         <div>
             <div className={style.main}>
                 <div className={style.title}>
-                    <h1>Inbox</h1><h4>{inboxContent.length}</h4>   
+                    <h1>Inbox</h1><h4>{inbox.length}</h4>   
                 </div>
                 
 
-                {inboxContent.length? (
+                {inbox.length? (
                   <div className={style.content}>
-                    {populateRequests(inboxContent)} 
+                    {populateRequests(inbox)} 
                   </div>
                    
                 ):(

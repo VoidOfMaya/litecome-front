@@ -42,7 +42,8 @@ function App() {
   const populateChannelData = (data) =>{
     setChannelData(data)
   }
-  const UpdateApp =()=>{
+  const updateApp =()=>{
+    console.log(`updating app`)
     setUpdate(prev => !prev);
   }
   //authentication:-
@@ -168,6 +169,11 @@ function App() {
     }
 
   }
+  //update inbox:-
+  const loadInbox = async() =>{
+    const result = await getPendingRequests(auth.accessToken);
+    setInbox(result);
+  }
 //app navigationn
   const goTo = (path) =>{
     redirect(path)
@@ -209,10 +215,6 @@ function App() {
           const result = await getChatlog(currentChannel);
           setChannelData(result)
       }
-    const loadInbox = async() =>{
-      const result = await getPendingRequests(auth.accessToken);
-      setInbox(result);
-    }
     loadInbox();
     loadDashboard();
     loadChannel();
@@ -236,14 +238,14 @@ function App() {
     //console.log(channelData)
   },[channelData])
   useEffect(()=>{
+
+  },[inbox])
+  useEffect(()=>{
+    console.log(`app update effect running`)
     const loadDashboard = async () =>{
       const dashboard = await getDashbaordData(auth.accessToken);
       console.log(dashboard)
       setChnls({channels: dashboard.channels, friends: dashboard.friends})
-    }
-    const loadInbox = async() =>{
-      const result = await getPendingRequests(auth.accessToken);
-      setInbox(result);
     }
     loadDashboard();
     loadInbox();
@@ -274,10 +276,11 @@ function App() {
           getChatlog,
           chnls,
           channelData,
-          UpdateApp,
+          updateApp,
           populateChannelData,
           chatLoader,
           inbox,
+          loadInbox,
           goTo
 
         }}/>
