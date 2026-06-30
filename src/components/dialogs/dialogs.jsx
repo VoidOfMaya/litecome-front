@@ -203,7 +203,7 @@ const SignupDialog = ({referance, close}) =>{
     )
 }
 
-const NewGroupDialog =  ({referance, close, auth, reAuth})=>{
+const NewGroupDialog =  ({referance, close, auth, reAuth, updateApp})=>{
     const [name, setName] = useState('');
       //creates new channel
       const createNewGroup = async(name) =>{
@@ -239,10 +239,10 @@ const NewGroupDialog =  ({referance, close, auth, reAuth})=>{
             <form 
                     style={{gridArea:'form'}}  
                     className={style.groupForm}
-                    onSubmit={(e)=> {
+                    onSubmit={async (e)=> {
                         e.preventDefault();
 
-                        createNewGroup(name);
+                        await createNewGroup(name);
                         referance.current.close();
                         close()
                     }}

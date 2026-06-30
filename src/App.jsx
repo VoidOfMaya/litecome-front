@@ -304,10 +304,11 @@ function App() {
       {displayDialog? (
           <div className={style.createGroupDialog}>
               < NewGroupDialog 
-              referance={newGroupRef}  c
-              lose={()=>setDisplayDialog(false)}
+              referance={newGroupRef}  
+              close={()=>setDisplayDialog(false)}
               auth={auth}
               reAuth={reAuth}
+              updateApp={updateApp}
               />
           </div>
         ):('')}   
