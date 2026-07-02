@@ -177,6 +177,7 @@ function App() {
   }
   //update inbox:-
   const loadInbox = async() =>{
+    if(!auth) return
     const result = await getPendingRequests(auth.accessToken);
     setInbox(result);
   }
@@ -241,7 +242,7 @@ function App() {
     if(!channelData)return
     console.log(channelData.members)
     setMembers(channelData.members)
-    //console.log(channelData)
+    console.log(channelData)
   },[channelData])
   useEffect(()=>{
 
@@ -249,6 +250,7 @@ function App() {
   useEffect(()=>{
     console.log(`app update effect running`)
     const loadDashboard = async () =>{
+      if(!auth) return
       const dashboard = await getDashbaordData(auth.accessToken);
       console.log(dashboard)
       setChnls({channels: dashboard.channels, friends: dashboard.friends})

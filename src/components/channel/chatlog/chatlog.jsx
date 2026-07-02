@@ -6,7 +6,7 @@ import { notify
 
  } from '../../norifications/notifications'
 const ChatLog=({messages, handleReply, isMod, needsUpdate, handleEditing})=>{
-    const {auth, reAuth, currentChannel} = useOutletContext();
+    const {auth, reAuth, currentChannel, handleCurrentChannel} = useOutletContext();
 
 
     const chatRef = useRef(null);
@@ -148,6 +148,10 @@ const ChatLog=({messages, handleReply, isMod, needsUpdate, handleEditing})=>{
         })
     },[messages])
     if (!auth?.user) return null;
+    if(!messages){
+        notify.error('Could not load chat Log')
+        handleCurrentChannel(1)
+    }
     if(messages.length <= 0 || !messages){
         return(
         <p>No messages found,Be the first to send a message!</p>

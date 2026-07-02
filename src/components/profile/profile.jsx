@@ -9,7 +9,7 @@ const Profile = () =>{
 /*
 user data:{id, email, name, bio, photo, is_online, last_login, created_at}
 */
-    const {auth, reAuth, chnls, currentChannel,handleCurrentChannel,goTo, updateApp}= useOutletContext();
+    const {auth, reAuth, chnls,handleCurrentChannel,goTo, updateApp}= useOutletContext();
     const redirect = useNavigate();
     const{profileId}= useParams();
     const [user, setUser] = useState({       
@@ -147,6 +147,7 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
                 reAuth(response);
                 return await response.json()
 
+
             }catch(err){
                 console.log(err.message)
                 notify.error(err.message)
@@ -200,23 +201,26 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
         
     }
     useEffect(()=>{
-        if(profileId){
-            handleCurrentChannel(null)
-        }
-    },[profileId])
-    useEffect(()=>{
         if (!auth) return redirect('/');
-        console.log(currentChannel)
+        console.log(chnls)
         const loadProfile = async() =>{
             setLoadingData(true)
-            const profileData = await getProfileData();
-            const relation = chnls.friends.find(friend =>{
-                return friend.id === profileData.id
-            })
-            setUser(profileData);
-            setMetadata({connectionId: relation.connectionId,channelId:relation.channelId})
-            setOnlineStatus(user.is_online);
-            setLoadingData(false)
+            try{
+                if(!profileId=== 'me'){
+                    const relation = chnls.friends.find(friend =>{
+                        return friend.id === profileData.id
+                    })
+                    if(!relation) throw new Error('relation was not found')
+                    setMetadata({connectionId: relation.connectionId,channelId:relation.channelId})
+                }
+                const profileData = await getProfileData();
+                setUser(profileData);
+                setOnlineStatus(user.is_online);
+                setLoadingData(false)                
+            }catch(err){
+                notify.error(err)
+            }
+
         }
         const handleFriend = () =>{
             const result = chnls.friends.some(friend =>{
@@ -228,6 +232,12 @@ user data:{id, email, name, bio, photo, is_online, last_login, created_at}
         loadProfile()
         handleFriend()
     },[])
+    useEffect(()=>{
+        console.log(`profile id is : ${profileId}`)
+        if(profileId){
+            handleCurrentChannel(null)
+        }
+    },[profileId])
     if(loadingData){
         return(<div>Loading ....</div>)
     }
